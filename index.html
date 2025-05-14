@@ -7,43 +7,108 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
-                background: #222;
+                background: linear-gradient(135deg, #1e3c72, #2a5298);
+                /* Blue gradient */
                 color: #fff;
                 font-family: 'Segoe UI', sans-serif;
-                padding: 40px 0;
+                padding: 20px 0;
+                margin: 0;
             }
 
             .container {
-                max-width: 600px;
-                background: #333;
-                padding: 30px;
+                max-width: 900px;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 20px;
                 border-radius: 16px;
                 box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
             }
 
             h1 {
-                color: #d6b0ff;
-                margin-bottom: 20px;
+                color: #ffcc00;
+                /* Bright yellow */
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             }
 
             .btn {
-                margin: 0 5px 10px 0;
+                margin: 0 10px 10px 0;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
             }
 
-            table {
-                background: #222;
+            .btn-primary {
+                background: #ff6f61;
+                /* Coral */
+                border: none;
+            }
+
+            .btn-primary:hover {
+                background: #e65c50;
+            }
+
+            .btn-success {
+                background: #28a745;
+                /* Green */
+                border: none;
+            }
+
+            .btn-success:hover {
+                background: #218838;
+            }
+
+            .btn-outline-light {
+                border: 2px solid #fff;
                 color: #fff;
+            }
+
+            .btn-outline-light:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .innings-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                /* 3 columns for compact layout */
+                gap: 10px;
                 margin-top: 20px;
             }
 
+            table {
+                width: 100%;
+                font-size: 0.7rem;
+                /* Reduced font size for compact layout */
+                color: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
             thead {
-                background: #a463f2;
+                background: #ff6f61;
+                /* Coral */
                 color: #fff;
             }
 
             td,
             th {
                 text-align: center;
+                padding: 4px;
+                /* Reduced padding for compact layout */
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            td {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            th {
+                font-weight: bold;
             }
 
             @media print {
@@ -60,16 +125,29 @@
                     background: #fff !important;
                     color: #000 !important;
                     box-shadow: none !important;
+                    padding: 0 !important;
+                }
+
+                .innings-container {
+                    grid-template-columns: repeat(2, 1fr);
+                    /* Adjust to 2 columns for printing */
+                    gap: 5px;
                 }
 
                 table {
                     background: #fff !important;
                     color: #000 !important;
+                    border: 1px solid #000 !important;
                 }
 
                 thead {
                     background: #ccc !important;
                     color: #000 !important;
+                }
+
+                td,
+                th {
+                    padding: 3px !important;
                 }
             }
 
@@ -84,7 +162,7 @@
                 <button class="btn btn-success" onclick="window.print()">Save as PDF</button>
                 <a href="rotation-log.html" class="btn btn-outline-light">View Rotation Log</a>
             </div>
-            <div id="inningsContainer"></div>
+            <div id="inningsContainer" class="innings-container"></div>
         </div>
         <script>
             const positions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'Bench 1', 'Bench 2', 'Bench 3'];
