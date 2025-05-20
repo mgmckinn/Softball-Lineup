@@ -8,7 +8,6 @@
         <style>
             body {
                 background: linear-gradient(135deg, #1e3c72, #2a5298);
-                /* Blue gradient */
                 color: #fff;
                 font-family: 'Segoe UI', sans-serif;
                 padding: 20px 0;
@@ -25,7 +24,6 @@
 
             h1 {
                 color: #ffcc00;
-                /* Bright yellow */
                 font-size: 2rem;
                 font-weight: bold;
                 margin-bottom: 10px;
@@ -42,7 +40,6 @@
 
             .btn-primary {
                 background: #ff6f61;
-                /* Coral */
                 border: none;
             }
 
@@ -52,7 +49,6 @@
 
             .btn-success {
                 background: #28a745;
-                /* Green */
                 border: none;
             }
 
@@ -73,7 +69,6 @@
             .innings-container {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                /* 3 columns for compact layout */
                 gap: 10px;
                 margin-top: 20px;
             }
@@ -81,7 +76,6 @@
             table {
                 width: 100%;
                 font-size: 0.7rem;
-                /* Reduced font size for compact layout */
                 color: #fff;
                 border-radius: 8px;
                 overflow: hidden;
@@ -91,7 +85,6 @@
 
             thead {
                 background: #ff6f61;
-                /* Coral */
                 color: #fff;
             }
 
@@ -99,7 +92,6 @@
             th {
                 text-align: center;
                 padding: 4px;
-                /* Reduced padding for compact layout */
                 border: 1px solid rgba(255, 255, 255, 0.2);
             }
 
@@ -109,6 +101,10 @@
 
             th {
                 font-weight: bold;
+            }
+
+            .draggable-player {
+                cursor: grab;
             }
 
             @media print {
@@ -130,7 +126,6 @@
 
                 .innings-container {
                     grid-template-columns: repeat(2, 1fr);
-                    /* Adjust to 2 columns for printing */
                     gap: 5px;
                 }
 
@@ -164,11 +159,13 @@
             </div>
             <div id="inningsContainer" class="innings-container"></div>
         </div>
+
+        <!-- SortableJS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
         <script>
             const positions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'Bench 1', 'Bench 2', 'Bench 3'];
             const originalPlayers = ['Reese', 'Norah', 'Maxie', 'London', 'Lena', 'Jolie', 'Colette', 'Clara', 'Cara', 'Maddie', 'Stella', 'Remi'];
 
-            // Fisher-Yates shuffle for true randomness
             function shuffle(array) {
                 let arr = array.slice();
                 for (let i = arr.length - 1; i > 0; i--) {
@@ -189,11 +186,31 @@
                         <tr><th colspan="2">Inning ${ idx + 1 }</th></tr>
                         <tr><th>Position</th><th>Player</th></tr>
                     </thead>
-                    <tbody>
-                        ${ lineup.map((item, i) => `<tr><td>${ positions[i] }</td><td>${ item }</td></tr>`).join('') }
+                    <tbody id="inning-tbody-${ idx }">
+                        ${ lineup.map((item, i) => `
+                            <tr data-index="${ i }">
+                                <td>${ positions[i] }</td>
+                                <td class="draggable-player">${ item }</td>
+                            </tr>
+                        `).join('') }
                     </tbody>
                 `;
                     container.appendChild(table);
+
+                    // Make tbody sortable
+                    Sortable.create(table.querySelector('tbody'), {
+                        animation: 150,
+                        onEnd: function (evt) {
+                            const tbody = evt.to;
+                            const newLineup = [];
+                            Array.from(tbody.children).forEach((row) => {
+                                const player = row.querySelector('.draggable-player').textContent;
+                                newLineup.push(player);
+                            });
+                            innings[idx] = newLineup;
+                            saveSixToLog(innings);
+                        }
+                    });
                 });
             }
 
@@ -208,7 +225,6 @@
                     let shuffled;
                     while (!valid && tries < 100) {
                         shuffled = shuffle(players);
-                        // Ensure this inning's lineup isn't a repeat of any previous inning in this set
                         if (!usedLineups.some(lineup => lineup.every((p, idx) => p === shuffled[idx]))) {
                             valid = true;
                             usedLineups.push([...shuffled]);
