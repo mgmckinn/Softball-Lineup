@@ -108,6 +108,14 @@
 
             .draggable-player {
                 cursor: grab;
+                user-select: none;
+            }
+
+            td[contenteditable="true"],
+            td[contenteditable="true"]:focus {
+                outline: 2px solid #a463f2;
+                background: #fff;
+                color: #3d0066;
             }
 
             @media print {
@@ -166,8 +174,8 @@
         <!-- SortableJS CDN -->
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
         <script>
-            const positions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'Bench 1', 'Bench 2', 'Bench 3'];
-            const originalPlayers = ['Reese', 'Norah', 'Maxie', 'London', 'Lena', 'Jolie', 'Colette', 'Clara', 'Cara', 'Maddie', 'Stella', 'Remi'];
+            let positions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'Bench 1', 'Bench 2', 'Bench 3'];
+            let originalPlayers = ['Reese', 'Norah', 'Maxie', 'London', 'Lena', 'Jolie', 'Colette', 'Clara', 'Cara', 'Maddie', 'Stella', 'Remi'];
 
             function shuffle(array) {
                 let arr = array.slice();
@@ -178,7 +186,7 @@
                 return arr;
             }
 
-            function renderSixInnings(innings) {
+            function renderSixInnings(innings, customPositions) {
                 const container = document.getElementById('inningsContainer');
                 container.innerHTML = '';
                 innings.forEach((lineup, idx) => {
@@ -192,35 +200,90 @@
                     <tbody id="inning-tbody-${ idx }">
                         ${ lineup.map((item, i) => `
                             <tr data-index="${ i }">
-                                <td>${ positions[i] }</td>
-                                <td class="draggable-player">${ item }</td>
+                                <td class="editable-position" contenteditable="true">${ customPositions ? customPositions[idx][i] : positions[i] }</td>
+                                <td class="draggable-player" contenteditable="true"><span class="drag-handle">${ item }</span></td>
                             </tr>
                         `).join('') }
                     </tbody>
                 `;
                     container.appendChild(table);
 
-                    // Make tbody sortable
+                    // Only allow dragging by player name, keep positions fixed
                     Sortable.create(table.querySelector('tbody'), {
                         animation: 150,
+                        handle: '.drag-handle',
+                        draggable: 'tr',
                         onEnd: function (evt) {
                             const tbody = evt.to;
                             const newLineup = [];
                             Array.from(tbody.children).forEach((row) => {
-                                const player = row.querySelector('.draggable-player').textContent;
+                                const player = row.querySelector('.drag-handle').textContent;
                                 newLineup.push(player);
                             });
                             innings[idx] = newLineup;
-                            saveSixToLog(innings);
+                            saveSixToLog(innings, getCurrentPositions());
                         }
                     });
+
+                    // Add event listeners for editing positions and players
+                    Array.from(table.querySelectorAll('.editable-position')).forEach((cell, i) => {
+                        cell.addEventListener('blur', function () {
+                            updatePositions();
+                        });
+                    });
+                    Array.from(table.querySelectorAll('.draggable-player')).forEach((cell, i) => {
+                        cell.addEventListener('blur', function () {
+                            updatePlayers();
+                        });
+                    });
                 });
+
+                function updatePositions() {
+                    const allPositions = [];
+                    document.querySelectorAll('.innings-container table tbody').forEach((tbody) => {
+                        const posRow = [];
+                        Array.from(tbody.children).forEach((row) => {
+                            posRow.push(row.children[0].textContent.trim());
+                        });
+                        allPositions.push(posRow);
+                    });
+                    saveSixToLog(innings, allPositions);
+                }
+
+                function updatePlayers() {
+                    const allPlayers = [];
+                    document.querySelectorAll('.innings-container table tbody').forEach((tbody) => {
+                        const playerRow = [];
+                        Array.from(tbody.children).forEach((row) => {
+                            playerRow.push(row.querySelector('.drag-handle').textContent.trim());
+                        });
+                        allPlayers.push(playerRow);
+                    });
+                    // Update innings in memory and save
+                    for (let i = 0; i < innings.length; i++) {
+                        innings[i] = allPlayers[i];
+                    }
+                    saveSixToLog(innings, getCurrentPositions());
+                }
+
+                function getCurrentPositions() {
+                    const allPositions = [];
+                    document.querySelectorAll('.innings-container table tbody').forEach((tbody) => {
+                        const posRow = [];
+                        Array.from(tbody.children).forEach((row) => {
+                            posRow.push(row.children[0].textContent.trim());
+                        });
+                        allPositions.push(posRow);
+                    });
+                    return allPositions;
+                }
             }
 
             function generateSixInnings() {
                 let players = [...originalPlayers];
                 let innings = [];
                 let usedLineups = [];
+                let customPositions = null;
 
                 for (let inning = 1; inning <= 6; inning++) {
                     let valid = false;
@@ -237,16 +300,19 @@
                     innings.push([...shuffled]);
                 }
 
-                renderSixInnings(innings);
-                saveSixToLog(innings);
+                renderSixInnings(innings, customPositions);
+                saveSixToLog(innings, null);
             }
 
-            function saveSixToLog(innings) {
+            function saveSixToLog(innings, customPositions) {
                 const log = JSON.parse(localStorage.getItem('rotationLog') || '[]');
                 const weekData = {
                     week: log.length + 1,
-                    innings: innings.map(lineup =>
-                        lineup.map((player, index) => ({ position: positions[index], player }))
+                    innings: innings.map((lineup, inningIdx) =>
+                        lineup.map((player, index) => ({
+                            position: customPositions ? customPositions[inningIdx][index] : positions[index],
+                            player
+                        }))
                     )
                 };
                 log.push(weekData);
