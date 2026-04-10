@@ -13,12 +13,6 @@ root.render(
   </React.StrictMode>,
 );
 
-// Register service worker for PWA functionality
-serviceWorkerRegistration.register({
-  onSuccess: () => console.log("App is ready for offline use!"),
-  onUpdate: (registration) => {
-    if (window.confirm("New version available! Reload to update?")) {
-      window.location.reload();
-    }
-  },
-});
+// Unregister service worker for development
+// Re-enable for production by changing unregister() to register()
+serviceWorkerRegistration.unregister();
