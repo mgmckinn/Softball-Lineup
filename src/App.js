@@ -3,6 +3,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
+import OfflineIndicator from "./components/OfflineIndicator";
 import LineupGenerator from "./components/LineupGenerator";
 import BattingOrder from "./components/BattingOrder";
 import RotationLog from "./components/RotationLog";
@@ -13,6 +14,7 @@ function App() {
     <Router>
       <div className='App'>
         <Sidebar />
+        <OfflineIndicator />
         <Routes>
           <Route path='/' element={<LineupGenerator />} />
           <Route path='/batting-order' element={<BattingOrder />} />

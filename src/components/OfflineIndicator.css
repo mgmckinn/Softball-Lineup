@@ -1,0 +1,64 @@
+/** @format */
+
+.offline-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+  transition: all 0.3s ease;
+}
+
+.offline-indicator.offline {
+  background: linear-gradient(135deg, #ff6b6b, #c92a2a);
+  color: white;
+}
+
+.offline-indicator.online {
+  background: linear-gradient(135deg, #51cf66, #2f9e44);
+  color: white;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.status-text {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media print {
+  .offline-indicator {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .offline-indicator {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
