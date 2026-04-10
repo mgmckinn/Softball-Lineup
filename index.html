@@ -69,6 +69,27 @@
                 color: #1B5E20;
             }
 
+            .form-select {
+                background-color: rgba(255, 215, 0, 0.1);
+                color: #FFD700;
+                border: 2px solid #DAA520;
+                padding: 8px 16px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+            }
+
+            .form-select:focus {
+                background-color: rgba(255, 215, 0, 0.2);
+                border-color: #FFD700;
+                color: #FFD700;
+                box-shadow: 0 0 0 0.2rem rgba(218, 165, 32, 0.25);
+            }
+
+            .form-select option {
+                background-color: #1B5E20;
+                color: #FFD700;
+            }
+
             .innings-container {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -164,7 +185,15 @@
         <div class="container text-center">
             <h1>Owlette Lineup Rotator</h1>
             <div class="no-print mb-3">
-                <button class="btn btn-primary" onclick="generateSixInnings()">Generate 6 Innings</button>
+                <select id="inningCount" class="form-select d-inline-block" style="width: auto; margin-right: 10px;">
+                    <option value="1">1 Inning</option>
+                    <option value="2">2 Innings</option>
+                    <option value="3">3 Innings</option>
+                    <option value="4">4 Innings</option>
+                    <option value="5">5 Innings</option>
+                    <option value="6" selected>6 Innings</option>
+                </select>
+                <button class="btn btn-primary" onclick="generateInnings()">Generate Innings</button>
                 <button class="btn btn-success" onclick="window.print()">Save as PDF</button>
                 <a href="rotation-log.html" class="btn btn-outline-light">View Rotation Log</a>
             </div>
@@ -174,8 +203,8 @@
         <!-- SortableJS CDN -->
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
         <script>
-            let positions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'Bench 1', 'Bench 2', 'Bench 3'];
-            let originalPlayers = ['Reese', 'Norah', 'Maxie', 'London', 'Lena', 'Jolie', 'Colette', 'Clara', 'Cara', 'Maddie', 'Stella', 'Remi'];
+            let positions = ['P', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'OF', 'OF'];
+            let originalPlayers = ['Holden', 'Daniel', 'Emmett', 'Lennon', 'Lewis', 'Kase', 'Nick', 'Wade', 'Wyatt', 'Max'];
 
             function shuffle(array) {
                 let arr = array.slice();
@@ -279,13 +308,14 @@
                 }
             }
 
-            function generateSixInnings() {
+            function generateInnings() {
+                const count = parseInt(document.getElementById('inningCount').value);
                 let players = [...originalPlayers];
                 let innings = [];
                 let usedLineups = [];
                 let customPositions = null;
 
-                for (let inning = 1; inning <= 6; inning++) {
+                for (let inning = 1; inning <= count; inning++) {
                     let valid = false;
                     let tries = 0;
                     let shuffled;
@@ -302,6 +332,12 @@
 
                 renderSixInnings(innings, customPositions);
                 saveSixToLog(innings, null);
+            }
+
+            // Keep backward compatibility
+            function generateSixInnings() {
+                document.getElementById('inningCount').value = '6';
+                generateInnings();
             }
 
             function saveSixToLog(innings, customPositions) {
