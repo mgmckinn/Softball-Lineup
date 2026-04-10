@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import InningTable from "./InningTable";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
@@ -12,7 +11,6 @@ import {
 import "./LineupGenerator.css";
 
 function LineupGenerator() {
-  const navigate = useNavigate();
   const [inningCount, setInningCount] = useState(6);
   const [innings, setInnings] = useState([]);
   const [customPositions, setCustomPositions] = useState([]);
@@ -99,11 +97,6 @@ function LineupGenerator() {
         </button>
         <button className='btn btn-success' onClick={handlePrint}>
           Save as PDF
-        </button>
-        <button
-          className='btn btn-outline-light'
-          onClick={() => navigate("/rotation-log")}>
-          View Rotation Log
         </button>
       </div>
       <div className='innings-container'>

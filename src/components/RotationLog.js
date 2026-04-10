@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
   shuffle,
@@ -11,7 +10,6 @@ import {
 import "./RotationLog.css";
 
 function RotationLog() {
-  const navigate = useNavigate();
   const [rotationLog, setRotationLog] = useLocalStorage("rotationLog", []);
 
   const defaultPositions = getDefaultPositions();
@@ -87,11 +85,6 @@ function RotationLog() {
     <div className='container'>
       <h1 className='text-center mb-4'>Softball Rotation Log</h1>
       <div className='text-center mb-4'>
-        <button
-          className='btn btn-outline-primary me-2'
-          onClick={() => navigate("/")}>
-          ← Back to Lineup
-        </button>
         <button className='btn btn-danger me-2' onClick={resetLog}>
           Reset Log
         </button>
