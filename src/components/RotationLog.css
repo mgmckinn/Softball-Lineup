@@ -13,13 +13,19 @@
 }
 
 @keyframes titlePulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+    text-shadow:
+      0 0 10px #ffd700,
+      0 0 20px #ffd700;
   }
   50% {
     transform: scale(1.02);
-    text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #daa520;
+    text-shadow:
+      0 0 20px #ffd700,
+      0 0 40px #ffd700,
+      0 0 60px #daa520;
   }
 }
 
