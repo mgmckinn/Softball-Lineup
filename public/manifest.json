@@ -27,12 +27,5 @@
   "background_color": "#1b5e20",
   "orientation": "portrait-primary",
   "scope": "/",
-  "categories": ["sports", "utilities"],
-  "screenshots": [
-    {
-      "src": "screenshot.png",
-      "type": "image/png",
-      "sizes": "540x720"
-    }
-  ]
+  "categories": ["sports", "utilities"]
 }

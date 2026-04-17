@@ -16,11 +16,37 @@
   gap: 5px;
   box-shadow: 0 4px 15px rgba(218, 165, 32, 0.5);
   transition: all 0.3s ease;
+  animation: slideInFromTop 0.5s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hamburger-btn:hover {
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.7);
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(5deg);
+  animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.05);
+  }
+  25% {
+    transform: rotate(5deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(-5deg) scale(1.05);
+  }
 }
 
 .hamburger-btn span {
@@ -58,7 +84,7 @@
   backdrop-filter: blur(10px);
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  transition: left 0.3s ease;
+  transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   border-right: 2px solid rgba(255, 215, 0, 0.3);
 }
 

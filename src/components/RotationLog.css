@@ -30,7 +30,8 @@
 }
 
 body {
-  padding: 20px;
+  padding: 0 !important;
+  margin: 0 !important;
   background: linear-gradient(-45deg, #1b5e20, #2e7d32, #1b5e20, #388e3c);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
@@ -50,6 +51,7 @@ h4 {
 
 h1 {
   font-size: 2.5rem;
+  margin: 0 0 20px;
 }
 
 h6 {

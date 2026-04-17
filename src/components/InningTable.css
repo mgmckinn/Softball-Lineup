@@ -62,8 +62,23 @@ table.inning-table:hover {
   box-shadow:
     0 12px 30px rgba(218, 165, 32, 0.6),
     0 0 60px rgba(255, 215, 0, 0.2);
-  transform: translateY(-5px) scale(1.01);
+  transform: translateY(-5px) scale(1.02);
   border-color: rgba(255, 215, 0, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 30px rgba(218, 165, 32, 0.6),
+      0 0 60px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 15px 40px rgba(218, 165, 32, 0.8),
+      0 0 80px rgba(255, 215, 0, 0.4);
+  }
 }
 
 table.inning-table:hover::after {
@@ -96,12 +111,56 @@ table.inning-table tbody tr {
   display: table-row;
   height: 10%;
   transition: all 0.3s ease;
+  animation: slideInRow 0.4s ease-out backwards;
+}
+
+table.inning-table tbody tr:nth-child(1) {
+  animation-delay: 0.1s;
+}
+table.inning-table tbody tr:nth-child(2) {
+  animation-delay: 0.15s;
+}
+table.inning-table tbody tr:nth-child(3) {
+  animation-delay: 0.2s;
+}
+table.inning-table tbody tr:nth-child(4) {
+  animation-delay: 0.25s;
+}
+table.inning-table tbody tr:nth-child(5) {
+  animation-delay: 0.3s;
+}
+table.inning-table tbody tr:nth-child(6) {
+  animation-delay: 0.35s;
+}
+table.inning-table tbody tr:nth-child(7) {
+  animation-delay: 0.4s;
+}
+table.inning-table tbody tr:nth-child(8) {
+  animation-delay: 0.45s;
+}
+table.inning-table tbody tr:nth-child(9) {
+  animation-delay: 0.5s;
+}
+table.inning-table tbody tr:nth-child(10) {
+  animation-delay: 0.55s;
+}
+
+@keyframes slideInRow {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 table.inning-table tbody tr:hover {
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(255, 215, 0, 0.15);
   transform: scale(1.02);
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  z-index: 10;
 }
 
 table.inning-table td,
@@ -121,8 +180,12 @@ table.inning-table td {
 }
 
 table.inning-table td:hover {
-  background: rgba(255, 215, 0, 0.15);
+  background: rgba(255, 215, 0, 0.2);
   color: #ffd700;
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  z-index: 15;
 }
 
 table.inning-table th {
@@ -131,6 +194,12 @@ table.inning-table th {
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+table.inning-table th:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(27, 94, 32, 0.8);
 }
 
 .draggable-player {

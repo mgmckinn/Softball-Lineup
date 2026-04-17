@@ -46,36 +46,34 @@ function InningTable({
           <th>Player</th>
         </tr>
       </thead>
-      <tbody>
-        <ReactSortable
-          list={sortableItems}
-          setList={handleDragEnd}
-          tag='tbody'
-          animation={150}>
-          {sortableItems.map((item, index) => (
-            <tr key={item.id} data-index={index}>
-              <td
-                contentEditable
-                suppressContentEditableWarning
-                onBlur={(e) =>
-                  handlePositionEdit(index, e.target.textContent.trim())
-                }
-                className='editable-position'>
-                {positions[index]}
-              </td>
-              <td
-                contentEditable
-                suppressContentEditableWarning
-                onBlur={(e) =>
-                  handlePlayerEdit(index, e.target.textContent.trim())
-                }
-                className='draggable-player'>
-                <span className='drag-handle'>{item.player}</span>
-              </td>
-            </tr>
-          ))}
-        </ReactSortable>
-      </tbody>
+      <ReactSortable
+        list={sortableItems}
+        setList={handleDragEnd}
+        tag='tbody'
+        animation={150}>
+        {sortableItems.map((item, index) => (
+          <tr key={item.id} data-index={index}>
+            <td
+              contentEditable
+              suppressContentEditableWarning
+              onBlur={(e) =>
+                handlePositionEdit(index, e.target.textContent.trim())
+              }
+              className='editable-position'>
+              {positions[index]}
+            </td>
+            <td
+              contentEditable
+              suppressContentEditableWarning
+              onBlur={(e) =>
+                handlePlayerEdit(index, e.target.textContent.trim())
+              }
+              className='draggable-player'>
+              <span className='drag-handle'>{item.player}</span>
+            </td>
+          </tr>
+        ))}
+      </ReactSortable>
     </table>
   );
 }

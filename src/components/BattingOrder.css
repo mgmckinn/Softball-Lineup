@@ -13,7 +13,8 @@
 
 .batting-order-page {
   min-height: 100vh;
-  padding: 80px 20px 40px;
+  padding: 10px 20px 40px !important;
+  margin-top: 0 !important;
   text-align: center;
 }
 
@@ -21,13 +22,25 @@
   color: #ffd700;
   font-size: 2.5rem;
   font-weight: 900;
-  margin: 20px 0;
+  margin: 10px 0 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow:
     0 0 20px rgba(255, 215, 0, 0.6),
     2px 2px 8px #1b5e20;
-  animation: fadeInBatting 0.6s ease-out;
+  animation:
+    fadeInBatting 0.6s ease-out,
+    titleBounce 2s ease-in-out infinite;
+}
+
+@keyframes titleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 .controls-section {
@@ -47,6 +60,12 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   animation: fadeInBatting 0.8s ease-out;
+  transition: all 0.3s ease;
+}
+
+.controls-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(218, 165, 32, 0.7);
 }
 
 .control-group h2 {
@@ -86,8 +105,9 @@ input[type="color"] {
 }
 
 input[type="color"]:hover {
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  transform: scale(1.1) rotate(5deg);
+  border-color: #ffd700;
 }
 
 input[type="file"] {
@@ -150,7 +170,27 @@ input[type="file"] {
     0 8px 32px rgba(218, 165, 32, 0.6),
     0 0 60px rgba(255, 215, 0, 0.2);
   border: 2px solid rgba(255, 215, 0, 0.3);
-  animation: fadeInBatting 1s ease-out;
+  animation:
+    fadeInBatting 1s ease-out,
+    float 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.batting-container:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 15px 45px rgba(218, 165, 32, 0.8),
+    0 0 80px rgba(255, 215, 0, 0.3);
 }
 
 .logos-container {
@@ -169,12 +209,14 @@ input[type="file"] {
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  animation: fadeInBatting 0.8s ease-out;
 }
 
 .batting-logo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+  filter: brightness(1.2);
 }
 
 .player-list {
@@ -221,9 +263,23 @@ input[type="file"] {
 
 .player-item:hover {
   background: linear-gradient(135deg, #2e7d32, #388e3c);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
-  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-5px) scale(1.03) rotate(1deg);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+  border-color: rgba(255, 215, 0, 0.6);
+  animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translateY(-5px) scale(1.03) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) scale(1.03) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-5px) scale(1.03) rotate(-1deg);
+  }
 }
 
 .player-item:hover::before {
