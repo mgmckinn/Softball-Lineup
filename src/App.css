@@ -3,7 +3,7 @@
 .App {
   min-height: 100vh;
   position: relative;
-  padding: 20px 0;
+  padding: 0;
 }
 
 .App::before {

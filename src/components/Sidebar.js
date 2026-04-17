@@ -48,13 +48,13 @@ function Sidebar() {
           <li
             className={location.pathname === "/batting-order" ? "active" : ""}
             onClick={() => handleNavigation("/batting-order")}>
-            <span className='menu-icon'>🏏</span>
+            <span className='menu-icon'>⚾</span>
             <span>Batting Order</span>
           </li>
           <li
             className={location.pathname === "/rotation-log" ? "active" : ""}
             onClick={() => handleNavigation("/rotation-log")}>
-            <span className='menu-icon'>📊</span>
+            <span className='menu-icon'>⚾</span>
             <span>Rotation Log</span>
           </li>
         </ul>
