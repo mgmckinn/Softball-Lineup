@@ -12,6 +12,7 @@ import "./App.css";
 function App() {
   return (
     <Router
+      basename='/Softball-Lineup'
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,
