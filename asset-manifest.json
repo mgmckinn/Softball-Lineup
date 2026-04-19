@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Softball-Lineup/static/css/main.caa2a0a9.css",
+    "main.js": "/Softball-Lineup/static/js/main.5b588f65.js",
+    "index.html": "/Softball-Lineup/index.html",
+    "main.caa2a0a9.css.map": "/Softball-Lineup/static/css/main.caa2a0a9.css.map",
+    "main.5b588f65.js.map": "/Softball-Lineup/static/js/main.5b588f65.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.caa2a0a9.css",
+    "static/js/main.5b588f65.js"
+  ]
+}
