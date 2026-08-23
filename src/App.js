@@ -9,20 +9,25 @@ import BattingOrder from "./components/BattingOrder";
 import RotationLog from "./components/RotationLog";
 import "./App.css";
 
-const APP_VERSION = "2.0"; // Updated version for softball positions
+const APP_VERSION = "2.1-softball"; // Updated version for softball positions
+
+// Run version check immediately before component mount
+const storedVersion = localStorage.getItem("appVersion");
+if (storedVersion !== APP_VERSION) {
+  // Clear ALL localStorage data to ensure fresh start
+  const keysToRemove = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key !== "appVersion") {
+      keysToRemove.push(key);
+    }
+  }
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
+  localStorage.setItem("appVersion", APP_VERSION);
+  console.log("Updated to version", APP_VERSION, "- cleared all old data");
+}
 
 function App() {
-  useEffect(() => {
-    // Check if we need to clear old data
-    const storedVersion = localStorage.getItem("appVersion");
-    if (storedVersion !== APP_VERSION) {
-      // Clear old rotation log data when version changes
-      localStorage.removeItem("rotationLog");
-      localStorage.setItem("appVersion", APP_VERSION);
-      console.log("Updated to version", APP_VERSION, "- cleared old data");
-    }
-  }, []);
-
   return (
     <Router
       basename='/Softball-Lineup'
