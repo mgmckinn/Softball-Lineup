@@ -236,18 +236,20 @@ td[contenteditable="true"]:focus {
 }
 
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
   table.inning-table {
-    background: #fff !important;
-    color: #000 !important;
-    border: 1px solid #000 !important;
     font-size: 0.7rem;
     display: table;
     min-height: auto;
+    animation: none !important;
   }
 
   table.inning-table thead {
-    background: #ccc !important;
-    color: #000 !important;
     display: table-header-group;
   }
 
@@ -258,11 +260,11 @@ td[contenteditable="true"]:focus {
   table.inning-table tbody tr {
     display: table-row;
     height: auto;
+    animation: none !important;
   }
 
   table.inning-table td,
   table.inning-table th {
-    border: 1px solid #000 !important;
     padding: 4px !important;
     display: table-cell;
   }

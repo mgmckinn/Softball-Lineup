@@ -85,28 +85,67 @@
 
 h1 {
   color: #ffffff;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 900;
-  margin: 0 0 15px !important;
+  margin: 0 0 20px !important;
   margin-top: 0 !important;
-  padding: 15px 30px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #9c27b0, #e91e63, #2196f3);
+  border-radius: 16px;
   display: inline-block;
   animation:
     titleGlow 3s ease-in-out infinite,
-    fadeInScale 0.6s ease-out;
-  letter-spacing: 2px;
+    fadeInScale 0.6s ease-out,
+    gradientShift 4s ease infinite;
+  letter-spacing: 5px;
   text-transform: uppercase;
   text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.4);
+    0 4px 8px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(255, 255, 255, 0.5),
+    0 0 50px rgba(233, 30, 99, 0.6);
+  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+h1::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background: linear-gradient(135deg, #9c27b0, #e91e63, #2196f3);
+  }
+  50% {
+    background: linear-gradient(135deg, #2196f3, #9c27b0, #e91e63);
+  }
 }
 
 h1:hover {
   transform: scale(1.03);
   transition: transform 0.3s ease;
-  background: rgba(0, 0, 0, 0.7);
 }
 
 .btn {
@@ -286,20 +325,14 @@ h1:hover {
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   .no-print {
     display: none !important;
   }
 
-  body {
-    background: #fff !important;
-    color: #000 !important;
-  }
-
   .lineup-container {
-    background: #fff !important;
-    color: #000 !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -311,6 +344,11 @@ h1:hover {
     font-size: 1.5rem !important;
     margin: 0 0 10px !important;
     page-break-after: avoid;
+    animation: none !important;
+  }
+
+  h1::before {
+    display: none;
   }
 
   .innings-container {
@@ -324,16 +362,8 @@ h1:hover {
   }
 
   table {
-    background: #fff !important;
-    color: #000 !important;
-    border: 1px solid #000 !important;
     font-size: 0.7rem !important;
     page-break-inside: avoid;
-  }
-
-  thead {
-    background: #ccc !important;
-    color: #000 !important;
   }
 
   td,
