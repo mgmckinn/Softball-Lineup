@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Softball-Lineup/static/css/main.95a7d390.css",
-    "main.js": "/Softball-Lineup/static/js/main.541366cd.js",
+    "main.css": "/Softball-Lineup/static/css/main.737a4e91.css",
+    "main.js": "/Softball-Lineup/static/js/main.f0c493e2.js",
     "index.html": "/Softball-Lineup/index.html",
-    "main.95a7d390.css.map": "/Softball-Lineup/static/css/main.95a7d390.css.map",
-    "main.541366cd.js.map": "/Softball-Lineup/static/js/main.541366cd.js.map"
+    "main.737a4e91.css.map": "/Softball-Lineup/static/css/main.737a4e91.css.map",
+    "main.f0c493e2.js.map": "/Softball-Lineup/static/js/main.f0c493e2.js.map"
   },
   "entrypoints": [
-    "static/css/main.95a7d390.css",
-    "static/js/main.541366cd.js"
+    "static/css/main.737a4e91.css",
+    "static/js/main.f0c493e2.js"
   ]
 }
