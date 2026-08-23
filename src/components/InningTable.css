@@ -28,10 +28,10 @@ table.inning-table {
   color: #fff;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(145deg, #1b5e20, #2e7d32);
+  background: linear-gradient(145deg, #ff6600, #ff8c00);
   box-shadow:
-    0 8px 20px rgba(218, 165, 32, 0.4),
-    0 0 40px rgba(255, 215, 0, 0.1);
+    0 8px 20px rgba(255, 102, 0, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.1);
   table-layout: fixed;
   border-collapse: collapse;
   display: flex;
@@ -39,7 +39,7 @@ table.inning-table {
   transition: all 0.4s ease;
   animation: fadeInUp 0.6s ease-out;
   position: relative;
-  border: 2px solid rgba(255, 215, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 table.inning-table::after {
@@ -52,7 +52,7 @@ table.inning-table::after {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 215, 0, 0.1),
+    rgba(255, 255, 255, 0.1),
     transparent
   );
   transition: left 0.5s;
@@ -60,10 +60,10 @@ table.inning-table::after {
 
 table.inning-table:hover {
   box-shadow:
-    0 12px 30px rgba(218, 165, 32, 0.6),
-    0 0 60px rgba(255, 215, 0, 0.2);
+    0 12px 30px rgba(255, 102, 0, 0.6),
+    0 0 60px rgba(255, 255, 255, 0.2);
   transform: translateY(-5px) scale(1.02);
-  border-color: rgba(255, 215, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -71,13 +71,13 @@ table.inning-table:hover {
   0%,
   100% {
     box-shadow:
-      0 12px 30px rgba(218, 165, 32, 0.6),
-      0 0 60px rgba(255, 215, 0, 0.2);
+      0 12px 30px rgba(255, 102, 0, 0.6),
+      0 0 60px rgba(255, 255, 255, 0.2);
   }
   50% {
     box-shadow:
-      0 15px 40px rgba(218, 165, 32, 0.8),
-      0 0 80px rgba(255, 215, 0, 0.4);
+      0 15px 40px rgba(255, 102, 0, 0.8),
+      0 0 80px rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -86,8 +86,8 @@ table.inning-table:hover::after {
 }
 
 table.inning-table thead {
-  background: linear-gradient(135deg, #daa520, #ffd700);
-  color: #1b5e20;
+  background: linear-gradient(135deg, #ffffff, #f5f5f5);
+  color: #ff6600;
   display: table;
   width: 100%;
   table-layout: fixed;
@@ -157,9 +157,9 @@ table.inning-table tbody tr:nth-child(10) {
 }
 
 table.inning-table tbody tr:hover {
-  background: rgba(255, 215, 0, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
   z-index: 10;
 }
 
@@ -167,7 +167,7 @@ table.inning-table td,
 table.inning-table th {
   text-align: center;
   padding: 12px 8px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: table-cell;
   vertical-align: middle;
   transition: all 0.3s ease;
@@ -180,11 +180,11 @@ table.inning-table td {
 }
 
 table.inning-table td:hover {
-  background: rgba(255, 215, 0, 0.2);
-  color: #ffd700;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   cursor: pointer;
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
   z-index: 15;
 }
 
@@ -199,7 +199,7 @@ table.inning-table th {
 
 table.inning-table th:hover {
   transform: scale(1.05);
-  text-shadow: 0 0 10px rgba(27, 94, 32, 0.8);
+  text-shadow: 0 0 10px rgba(255, 102, 0, 0.8);
 }
 
 .draggable-player {
@@ -209,8 +209,8 @@ table.inning-table th:hover {
 }
 
 .draggable-player:hover {
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .draggable-player:active {
@@ -221,13 +221,13 @@ table.inning-table th:hover {
 td[contenteditable="true"],
 td[contenteditable="true"]:focus {
   outline: none;
-  background: linear-gradient(135deg, #fff, #ffd700);
-  color: #1b5e20;
+  background: linear-gradient(135deg, #fff, #ffffff);
+  color: #ff6600;
   font-weight: 700;
   box-shadow:
-    0 0 15px rgba(255, 215, 0, 0.6),
+    0 0 15px rgba(255, 255, 255, 0.6),
     inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 2px solid #daa520;
+  border: 2px solid #ff6600;
 }
 
 .drag-handle {

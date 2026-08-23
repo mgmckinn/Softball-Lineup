@@ -23,8 +23,8 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#1b5e20",
-  "background_color": "#1b5e20",
+  "theme_color": "#FF6600",
+  "background_color": "#FF6600",
   "orientation": "portrait-primary",
   "scope": "/",
   "categories": ["sports", "utilities"]

@@ -82,7 +82,7 @@ function RotationLog() {
   };
 
   return (
-    <div className='container'>
+    <div className='rotation-log-container'>
       <h1 className='text-center mb-4'>Softball Rotation Log</h1>
       <div className='text-center mb-4'>
         <button className='btn btn-danger me-2' onClick={resetLog}>

@@ -22,8 +22,8 @@ function BattingOrder() {
     defaultPlayers.map((name, index) => ({ id: index + 1, name })),
   );
   const [newName, setNewName] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("#1b5e20");
-  const [textColor, setTextColor] = useState("#ffd700");
+  const [primaryColor, setPrimaryColor] = useState("#FF6600");
+  const [textColor, setTextColor] = useState("#FFFFFF");
   const [sponsorLogo, setSponsorLogo] = useState(null);
   const [teamLogo, setTeamLogo] = useState(null);
 

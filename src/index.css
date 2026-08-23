@@ -21,7 +21,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(-45deg, #1b5e20, #2e7d32, #1b5e20, #388e3c);
+  background: linear-gradient(-45deg, #ff6600, #ff8c00, #ffa500, #ff7043);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   color: #fff;

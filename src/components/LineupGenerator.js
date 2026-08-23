@@ -74,7 +74,7 @@ function LineupGenerator() {
   };
 
   return (
-    <div className='container text-center'>
+    <div className='lineup-container text-center'>
       <h1>Athletics Lineup Rotator</h1>
       <div className='no-print mb-3'>
         <select

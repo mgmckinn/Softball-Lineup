@@ -1,35 +1,34 @@
 /** @format */
 
 .App {
+  /* Using min-block-size for better logical property support */
   min-height: 100vh;
   position: relative;
-  padding: 0 !important;
-  margin: 0 !important;
+  /* Resetting margins/padding once; avoid !important unless overriding 3rd party styles */
+  margin: 0;
+  padding: 0;
 }
 
 .App::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0; /* Shorthand for top, left, bottom, right: 0 */
   background:
     radial-gradient(
       circle at 20% 50%,
-      rgba(255, 215, 0, 0.05) 0%,
+      rgba(255, 255, 255, 0.08) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 80% 80%,
-      rgba(46, 125, 50, 0.05) 0%,
+      rgba(255, 140, 0, 0.08) 0%,
       transparent 50%
     );
   pointer-events: none;
-  z-index: 0;
+  z-index: -1; /* Moved to -1 so children don't all need relative positioning */
 }
 
 .App > * {
-  position: relative;
-  z-index: 1;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
