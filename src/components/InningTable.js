@@ -63,10 +63,9 @@ function InningTable({
         tag='tbody'
         animation={150}
         ghostClass='sortable-ghost'
-        dragClass='sortable-drag'
-        handle='.draggable-player'>
+        dragClass='sortable-drag'>
         {sortableItems.map((item, index) => (
-          <tr key={item.id} data-index={index}>
+          <tr key={item.id} data-index={index} className='draggable-row'>
             <td
               contentEditable
               suppressContentEditableWarning
@@ -76,14 +75,17 @@ function InningTable({
               className='editable-position'>
               {positions[index]}
             </td>
-            <td
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) =>
-                handlePlayerEdit(index, e.target.textContent.trim())
-              }
-              className='draggable-player'>
-              <span className='drag-handle'>{item.player}</span>
+            <td className='player-cell'>
+              <span className='drag-handle draggable-player'>☰</span>
+              <span
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) =>
+                  handlePlayerEdit(index, e.target.textContent.trim())
+                }
+                className='player-name'>
+                {item.player}
+              </span>
             </td>
           </tr>
         ))}
