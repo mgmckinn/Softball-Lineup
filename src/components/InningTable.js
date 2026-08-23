@@ -39,7 +39,18 @@ function InningTable({
     <table className='table table-bordered inning-table'>
       <thead>
         <tr>
-          <th colSpan='2'>Inning {inningNumber}</th>
+          <th colSpan='2'>
+            Inning {inningNumber}
+            <div
+              style={{
+                fontSize: "0.7rem",
+                fontWeight: "normal",
+                marginTop: "4px",
+                opacity: "0.8",
+              }}>
+              (Drag players to reorder)
+            </div>
+          </th>
         </tr>
         <tr>
           <th>Position</th>
@@ -50,7 +61,10 @@ function InningTable({
         list={sortableItems}
         setList={handleDragEnd}
         tag='tbody'
-        animation={150}>
+        animation={150}
+        ghostClass='sortable-ghost'
+        dragClass='sortable-drag'
+        handle='.draggable-player'>
         {sortableItems.map((item, index) => (
           <tr key={item.id} data-index={index}>
             <td
