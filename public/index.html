@@ -8,8 +8,8 @@
         <!-- PWA Primary Meta Tags -->
         <meta name="theme-color" content="#1b5e20" />
         <meta name="description"
-            content="Athletics Softball Lineup Manager - Create lineups, batting orders, and manage rotation schedules" />
-        <meta name="keywords" content="softball, lineup, batting order, athletics, sports, team management" />
+            content="Sunny D's Softball Lineup Manager - Create lineups, batting orders, and manage rotation schedules" />
+        <meta name="keywords" content="softball, lineup, batting order, sunny d's, sports, team management" />
 
         <!-- PWA Manifest -->
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -21,7 +21,7 @@
         <!-- iOS Meta Tags -->
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Athletics Lineup" />
+        <meta name="apple-mobile-web-app-title" content="Sunny D's Lineup" />
 
         <!-- Android Meta Tags -->
         <meta name="mobile-web-app-capable" content="yes" />
@@ -33,7 +33,31 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <title>Athletics Lineup Rotator</title>
+        <!-- GitHub Pages SPA redirect script -->
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // MIT License
+            // https://github.com/rafgraph/spa-github-pages
+            // This script checks to see if a redirect is present in the query string,
+            // converts it back into the correct url and adds it to the
+            // browser's history using window.history.replaceState(...),
+            // which won't cause the browser to attempt to load the new url.
+            // When the single page app is loaded further down in this file,
+            // the correct url will be waiting in the browser's history for
+            // the single page app to route accordingly.
+            (function (l) {
+                if (l.search[1] === '/') {
+                    var decoded = l.search.slice(1).split('&').map(function (s) {
+                        return s.replace(/~and~/g, '&')
+                    }).join('?');
+                    window.history.replaceState(null, null,
+                        l.pathname.slice(0, -1) + decoded + l.hash
+                    );
+                }
+            }(window.location))
+        </script>
+
+        <title>Sunny D's Lineup Rotator</title>
     </head>
 
     <body>
