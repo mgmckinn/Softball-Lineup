@@ -6,16 +6,16 @@ import "./BattingOrder.css";
 
 function BattingOrder() {
   const defaultPlayers = [
-    "Daniel",
-    "Emmett",
-    "Henry Lennon",
-    "Henry Lewis",
-    "Holden",
-    "Kase",
-    "Nicholas",
-    "Wade",
-    "Wyatt",
-    "Max",
+    "Braelynn",
+    "Brynleigh",
+    "Camille",
+    "Charley",
+    "Dakota",
+    "Hadley",
+    "Elizabeth",
+    "Madelyn O",
+    "Madelyn M",
+    "RaeLynn",
   ];
 
   const [players, setPlayers] = useState(
@@ -151,7 +151,7 @@ function BattingOrder() {
         </div>
       </div>
 
-      <h1 className='batting-title'>Athletics Batting Order</h1>
+      <h1 className='batting-title'>Sunny D's Batting Order</h1>
 
       <div className='batting-container'>
         <div className='logos-container'>

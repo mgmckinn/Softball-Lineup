@@ -59,21 +59,21 @@ export function saveToLog(innings, positions, log, setLog) {
 
 // Default positions
 export function getDefaultPositions() {
-  return ["P", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "OF"];
+  return ["P", "C", "1B", "2B", "3B", "SS", "LF", "LC", "RC", "RF"];
 }
 
 // Default players
 export function getDefaultPlayers() {
   return [
-    "Holden",
-    "Daniel",
-    "Emmett",
-    "Lennon",
-    "Lewis",
-    "Kase",
-    "Nick",
-    "Wade",
-    "Wyatt",
-    "Max",
+    "Braelynn",
+    "Brynleigh",
+    "Camille",
+    "Charley",
+    "Dakota",
+    "Hadley",
+    "Elizabeth",
+    "Madelyn O",
+    "Madelyn M",
+    "RaeLynn",
   ];
 }
