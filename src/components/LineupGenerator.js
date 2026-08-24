@@ -15,6 +15,7 @@ function LineupGenerator() {
   const [innings, setInnings] = useState([]);
   const [customPositions, setCustomPositions] = useState([]);
   const [rotationLog, setRotationLog] = useLocalStorage("rotationLog", []);
+  const [copiedInning, setCopiedInning] = useState(null);
 
   const defaultPositions = getDefaultPositions();
   const defaultPlayers = getDefaultPlayers();
@@ -73,6 +74,27 @@ function LineupGenerator() {
     window.print();
   };
 
+  const handleCopyInning = (inningIndex) => {
+    setCopiedInning({
+      lineup: [...innings[inningIndex]],
+      positions: [...customPositions[inningIndex]],
+    });
+  };
+
+  const handlePasteInning = (inningIndex) => {
+    if (!copiedInning) return;
+
+    const newInnings = [...innings];
+    const newCustomPositions = [...customPositions];
+
+    newInnings[inningIndex] = [...copiedInning.lineup];
+    newCustomPositions[inningIndex] = [...copiedInning.positions];
+
+    setInnings(newInnings);
+    setCustomPositions(newCustomPositions);
+    saveToLog(newInnings, newCustomPositions);
+  };
+
   return (
     <div className='lineup-container text-center'>
       <h1>Sunny D's Lineup Rotator</h1>
@@ -101,16 +123,34 @@ function LineupGenerator() {
       </div>
       <div className='innings-container'>
         {innings.map((lineup, index) => (
-          <InningTable
-            key={index}
-            inningNumber={index + 1}
-            lineup={lineup}
-            positions={customPositions[index] || defaultPositions}
-            onLineupChange={(newLineup) => handleLineupChange(index, newLineup)}
-            onPositionChange={(newPositions) =>
-              handlePositionChange(index, newPositions)
-            }
-          />
+          <div key={index} className='inning-block'>
+            <div className='inning-actions no-print'>
+              <button
+                className='btn btn-sm btn-outline-light'
+                onClick={() => handleCopyInning(index)}
+                title='Copy this inning'>
+                📋 Copy
+              </button>
+              <button
+                className='btn btn-sm btn-outline-light'
+                onClick={() => handlePasteInning(index)}
+                disabled={!copiedInning}
+                title='Paste copied inning here'>
+                📄 Paste
+              </button>
+            </div>
+            <InningTable
+              inningNumber={index + 1}
+              lineup={lineup}
+              positions={customPositions[index] || defaultPositions}
+              onLineupChange={(newLineup) =>
+                handleLineupChange(index, newLineup)
+              }
+              onPositionChange={(newPositions) =>
+                handlePositionChange(index, newPositions)
+              }
+            />
+          </div>
         ))}
       </div>
     </div>

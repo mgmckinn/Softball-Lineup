@@ -316,10 +316,43 @@ h1:hover {
   }
 }
 
+.inning-block {
+  position: relative;
+}
+
+.inning-actions {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.inning-actions .btn {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.inning-actions .btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.inning-actions .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 @media print {
   @page {
     size: letter landscape;
-    margin: 0.3in;
+    margin: 0.4in 0.3in;
   }
 
   * {
@@ -332,19 +365,30 @@ h1:hover {
     display: none !important;
   }
 
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   .lineup-container {
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
     page-break-inside: avoid;
+    transform: scale(0.95);
+    transform-origin: top left;
   }
 
   h1 {
-    font-size: 1.5rem !important;
-    margin: 0 0 10px !important;
+    font-size: 1.3rem !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
     page-break-after: avoid;
     animation: none !important;
+    text-align: center;
   }
 
   h1::before {
@@ -352,24 +396,49 @@ h1:hover {
   }
 
   .innings-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
     page-break-inside: avoid;
+    width: 100% !important;
   }
 
   .inning-block {
     page-break-inside: avoid;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   table {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
     page-break-inside: avoid;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  td,
-  th {
-    padding: 2px 4px !important;
-    font-size: 0.7rem !important;
+  table.inning-table thead {
+    background: linear-gradient(135deg, #9c27b0, #e91e63) !important;
+  }
+
+  table.inning-table th,
+  table.inning-table td {
+    padding: 3px 4px !important;
+    font-size: 0.65rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+
+  .player-cell {
+    padding: 3px !important;
+  }
+
+  .draggable-player,
+  .drag-handle {
+    display: none !important;
+  }
+
+  .player-name {
+    display: block !important;
+    width: 100% !important;
   }
 }
 

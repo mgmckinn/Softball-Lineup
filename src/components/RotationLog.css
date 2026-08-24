@@ -202,7 +202,7 @@ h6 {
 @media print {
   @page {
     size: letter portrait;
-    margin: 0.5in;
+    margin: 0.5in 0.6in;
   }
 
   * {
@@ -215,10 +215,23 @@ h6 {
     display: none !important;
   }
 
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   h1 {
-    font-size: 1.3rem !important;
-    margin: 0 0 8px !important;
+    font-size: 1.4rem !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
     animation: none !important;
+    text-align: center;
+  }
+
+  h4 {
+    font-size: 1.1rem !important;
+    margin: 8px 0 6px !important;
+    page-break-after: avoid;
   }
 
   h1::before,
@@ -230,30 +243,39 @@ h6 {
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .week-section {
+    page-break-inside: avoid;
+    margin-bottom: 15px !important;
   }
 
   .inning-block {
     page-break-inside: avoid;
-    margin-bottom: 10px;
+    margin-bottom: 8px !important;
   }
 
   h6 {
-    font-size: 0.9rem !important;
-    margin: 5px 0 !important;
+    font-size: 0.85rem !important;
+    margin: 4px 0 !important;
   }
 
   table {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
+    width: 100% !important;
+    page-break-inside: avoid;
   }
 
   table th,
   table td {
-    padding: 3px 5px !important;
-    font-size: 0.75rem !important;
+    padding: 3px 6px !important;
+    font-size: 0.7rem !important;
   }
 
   thead {
-    background-color: #ccc !important;
-    color: #000 !important;
+    background: linear-gradient(135deg, #9c27b0, #e91e63) !important;
+    color: #ffffff !important;
   }
 }
