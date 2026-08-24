@@ -299,30 +299,11 @@ td[contenteditable="true"]:focus {
   }
 
   table.inning-table {
-    font-size: 0.7rem;
-    display: table;
-    min-height: auto;
     animation: none !important;
-  }
-
-  table.inning-table thead {
-    display: table-header-group;
-  }
-
-  table.inning-table tbody {
-    display: table-row-group;
   }
 
   table.inning-table tbody tr {
-    display: table-row;
-    height: auto;
     animation: none !important;
-  }
-
-  table.inning-table td,
-  table.inning-table th {
-    padding: 4px !important;
-    display: table-cell;
   }
 }
 

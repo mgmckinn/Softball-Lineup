@@ -34,9 +34,14 @@
 }
 
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
   .App {
     background: white !important;
-    background-image: none !important;
   }
 
   .App::before {
