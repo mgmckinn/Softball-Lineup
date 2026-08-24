@@ -45,3 +45,16 @@ code {
     background-position: 0% 50%;
   }
 }
+
+@media print {
+  body {
+    background: white !important;
+    background-image: none !important;
+    animation: none !important;
+    color: #000 !important;
+  }
+
+  #root {
+    background: white !important;
+  }
+}

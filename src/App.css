@@ -32,3 +32,14 @@
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
+
+@media print {
+  .App {
+    background: white !important;
+    background-image: none !important;
+  }
+
+  .App::before {
+    display: none !important;
+  }
+}

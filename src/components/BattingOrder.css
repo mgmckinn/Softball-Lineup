@@ -350,7 +350,7 @@ input[type="file"] {
 @media print {
   @page {
     size: letter portrait;
-    margin: 0.6in 0.75in;
+    margin: 0.5in;
   }
 
   * {
@@ -366,21 +366,38 @@ input[type="file"] {
   body {
     margin: 0 !important;
     padding: 0 !important;
+    background: white !important;
+    background-image: none !important;
+  }
+
+  #root {
+    background: white !important;
+    background-image: none !important;
   }
 
   .batting-order-page {
     padding: 0 !important;
+    margin: 0 auto !important;
     page-break-inside: avoid;
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 7.5in !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background: white !important;
   }
 
   .batting-title {
-    font-size: 1.8rem !important;
-    margin: 0 0 15px !important;
-    padding: 0 !important;
+    font-size: 2.2rem !important;
+    margin: 0 0 25px !important;
+    padding: 20px 0 !important;
     animation: none !important;
     text-align: center;
+    background: linear-gradient(135deg, #9c27b0, #e91e63) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    flex-shrink: 0;
   }
 
   .batting-title::before {
@@ -390,27 +407,39 @@ input[type="file"] {
   .batting-container {
     box-shadow: none !important;
     border: none !important;
-    padding: 15px !important;
+    padding: 0 20px !important;
     margin: 0 auto !important;
     max-width: 100% !important;
+    width: 100% !important;
     page-break-inside: avoid;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-evenly !important;
+    background: white !important;
   }
 
   .player-list {
     list-style: decimal inside !important;
     padding-left: 0 !important;
     margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-evenly !important;
+    flex: 1 !important;
   }
 
   .player-item {
     page-break-inside: avoid;
     cursor: default;
     animation: none !important;
-    padding: 10px 20px !important;
-    font-size: 1rem !important;
+    padding: 14px 25px !important;
+    font-size: 1.3rem !important;
     margin: 6px 0 !important;
     background: linear-gradient(135deg, #9c27b0, #e91e63) !important;
-    border-radius: 8px;
+    border-radius: 10px;
+    font-weight: 500 !important;
+    color: white !important;
   }
 
   .player-item:hover {
