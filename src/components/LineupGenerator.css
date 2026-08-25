@@ -349,6 +349,118 @@ h1:hover {
   cursor: not-allowed;
 }
 
+.saved-rotations-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  margin: 0 auto 20px;
+  max-width: 900px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.saved-rotations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.saved-rotation-item {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.saved-rotation-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(5px);
+}
+
+.rotation-info {
+  color: #ffffff;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.rotation-info strong {
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+}
+
+.rotation-info small {
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+.rotation-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rotation-actions .btn {
+  padding: 5px 15px;
+  font-size: 0.9rem;
+}
+
+.save-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.save-modal-content {
+  background: linear-gradient(135deg, #9c27b0, #e91e63);
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.save-modal-content h3 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.save-modal-content .form-control {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-buttons .btn {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
 @media print {
   @page {
     size: letter landscape;

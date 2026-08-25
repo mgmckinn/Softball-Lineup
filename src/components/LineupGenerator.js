@@ -16,6 +16,12 @@ function LineupGenerator() {
   const [customPositions, setCustomPositions] = useState([]);
   const [rotationLog, setRotationLog] = useLocalStorage("rotationLog", []);
   const [copiedInning, setCopiedInning] = useState(null);
+  const [savedRotations, setSavedRotations] = useLocalStorage(
+    "savedRotations",
+    [],
+  );
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [rotationName, setRotationName] = useState("");
 
   const defaultPositions = getDefaultPositions();
   const defaultPlayers = getDefaultPlayers();
@@ -95,6 +101,43 @@ function LineupGenerator() {
     saveToLog(newInnings, newCustomPositions);
   };
 
+  const handleSaveRotation = () => {
+    if (!rotationName.trim()) {
+      alert("Please enter a name for this rotation!");
+      return;
+    }
+
+    const newSavedRotation = {
+      id: Date.now(),
+      name: rotationName.trim(),
+      date: new Date().toLocaleDateString(),
+      innings: innings,
+      positions: customPositions,
+      inningCount: innings.length,
+    };
+
+    setSavedRotations([...savedRotations, newSavedRotation]);
+    setRotationName("");
+    setShowSaveModal(false);
+    alert(`Rotation "${newSavedRotation.name}" saved successfully!`);
+  };
+
+  const handleLoadRotation = (rotationId) => {
+    const rotation = savedRotations.find((r) => r.id === rotationId);
+    if (rotation) {
+      setInnings(rotation.innings);
+      setCustomPositions(rotation.positions);
+      setInningCount(rotation.inningCount);
+    }
+  };
+
+  const handleDeleteRotation = (rotationId) => {
+    const rotation = savedRotations.find((r) => r.id === rotationId);
+    if (rotation && window.confirm(`Delete rotation "${rotation.name}"?`)) {
+      setSavedRotations(savedRotations.filter((r) => r.id !== rotationId));
+    }
+  };
+
   return (
     <div className='lineup-container text-center'>
       <h1>Sunny D's Lineup Rotator</h1>
@@ -120,7 +163,82 @@ function LineupGenerator() {
         <button className='btn btn-success' onClick={handlePrint}>
           Save as PDF
         </button>
+        <button
+          className='btn btn-info'
+          onClick={() => setShowSaveModal(true)}
+          style={{ marginLeft: "10px" }}>
+          💾 Save Rotation
+        </button>
       </div>
+
+      {savedRotations.length > 0 && (
+        <div className='no-print mb-3 saved-rotations-section'>
+          <h4
+            style={{
+              color: "#ffffff",
+              fontSize: "1.2rem",
+              marginBottom: "10px",
+            }}>
+            Saved Rotations
+          </h4>
+          <div className='saved-rotations-list'>
+            {savedRotations.map((rotation) => (
+              <div key={rotation.id} className='saved-rotation-item'>
+                <span className='rotation-info'>
+                  <strong>{rotation.name}</strong>
+                  <small>
+                    {" "}
+                    ({rotation.inningCount} innings - {rotation.date})
+                  </small>
+                </span>
+                <div className='rotation-actions'>
+                  <button
+                    className='btn btn-sm btn-primary'
+                    onClick={() => handleLoadRotation(rotation.id)}>
+                    Load
+                  </button>
+                  <button
+                    className='btn btn-sm btn-danger'
+                    onClick={() => handleDeleteRotation(rotation.id)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {showSaveModal && (
+        <div className='no-print save-modal'>
+          <div className='save-modal-content'>
+            <h3>Save Current Rotation</h3>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Enter rotation name (e.g., "Week 1 - Opening Day")'
+              value={rotationName}
+              onChange={(e) => setRotationName(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSaveRotation()}
+              autoFocus
+            />
+            <div className='modal-buttons'>
+              <button className='btn btn-success' onClick={handleSaveRotation}>
+                Save
+              </button>
+              <button
+                className='btn btn-secondary'
+                onClick={() => {
+                  setShowSaveModal(false);
+                  setRotationName("");
+                }}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className='innings-container'>
         {innings.map((lineup, index) => (
           <div key={index} className='inning-block'>
