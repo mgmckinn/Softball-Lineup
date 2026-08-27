@@ -175,9 +175,10 @@ function LineupGenerator() {
         <div className='no-print mb-3 saved-rotations-section'>
           <h4
             style={{
-              color: "#ffffff",
+              color: "#000000",
               fontSize: "1.2rem",
               marginBottom: "10px",
+              fontWeight: "700",
             }}>
             Saved Rotations
           </h4>

@@ -350,13 +350,18 @@ h1:hover {
 }
 
 .saved-rotations-section {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.95);
   padding: 15px;
   border-radius: 12px;
   margin: 0 auto 20px;
   max-width: 900px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(156, 39, 176, 0.4);
+}
+
+.saved-rotations-section h4 {
+  color: #000000 !important;
+  font-weight: 700 !important;
 }
 
 .saved-rotations-list {
@@ -366,23 +371,24 @@ h1:hover {
 }
 
 .saved-rotation-item {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.9);
   padding: 12px 15px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(156, 39, 176, 0.3);
 }
 
 .saved-rotation-item:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 1);
   transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
 }
 
 .rotation-info {
-  color: #ffffff;
+  color: #000000 !important;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -391,11 +397,14 @@ h1:hover {
 .rotation-info strong {
   font-size: 1.1rem;
   margin-bottom: 3px;
+  color: #000000 !important;
+  font-weight: 700;
 }
 
 .rotation-info small {
-  opacity: 0.8;
+  opacity: 1;
   font-size: 0.85rem;
+  color: #333333 !important;
 }
 
 .rotation-actions {

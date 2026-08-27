@@ -6,7 +6,7 @@ import "./BattingOrder.css";
 
 function BattingOrder() {
   const defaultPlayers = [
-    "Braelynn",
+    "Btraelynn",
     "Brynleigh",
     "Camille",
     "Charley",
