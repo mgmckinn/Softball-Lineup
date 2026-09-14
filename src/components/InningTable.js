@@ -10,6 +10,8 @@ function InningTable({
   positions,
   onLineupChange,
   onPositionChange,
+  positionInputMode = "write-in",
+  positionOptions = [],
 }) {
   const handleDragEnd = (newLineup) => {
     // Extract just the player names from the sorted items
@@ -35,26 +37,34 @@ function InningTable({
     player: player,
   }));
 
+  const getRowPositionOptions = (positionValue) => {
+    const current = (positionValue || "").trim();
+    if (!current || positionOptions.includes(current)) {
+      return positionOptions;
+    }
+    return [...positionOptions, current];
+  };
+
   return (
     <table className='table table-bordered inning-table'>
       <thead>
         <tr>
-          <th colSpan='2'>
-            Inning {inningNumber}
-            <div
-              style={{
-                fontSize: "0.7rem",
-                fontWeight: "normal",
-                marginTop: "4px",
-                opacity: "0.8",
-              }}>
-              (Drag players to reorder)
+          <th colSpan='2' className='inning-title-cell'>
+            <div className='inning-title-wrap'>
+              <span className='inning-badge'>Inning {inningNumber}</span>
+              <span className='inning-subtitle'>Drag to reorder players</span>
             </div>
           </th>
         </tr>
         <tr>
-          <th>Position</th>
-          <th>Player</th>
+          <th className='column-label position-label'>
+            <span className='label-kicker'>Defense</span>
+            Position
+          </th>
+          <th className='column-label player-label'>
+            <span className='label-kicker'>Batting</span>
+            Player
+          </th>
         </tr>
       </thead>
       <ReactSortable
@@ -66,15 +76,32 @@ function InningTable({
         dragClass='sortable-drag'>
         {sortableItems.map((item, index) => (
           <tr key={item.id} data-index={index} className='draggable-row'>
-            <td
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) =>
-                handlePositionEdit(index, e.target.textContent.trim())
-              }
-              className='editable-position'>
-              {positions[index]}
-            </td>
+            {positionInputMode === "dropdown" ? (
+              <td className='position-select-cell'>
+                <select
+                  className='position-select'
+                  aria-label='Choose position'
+                  value={positions[index] || ""}
+                  onChange={(e) => handlePositionEdit(index, e.target.value)}>
+                  <option value=''></option>
+                  {getRowPositionOptions(positions[index]).map((position) => (
+                    <option key={position} value={position}>
+                      {position}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            ) : (
+              <td
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) =>
+                  handlePositionEdit(index, e.target.textContent.trim())
+                }
+                className='editable-position'>
+                {positions[index]}
+              </td>
+            )}
             <td className='player-cell'>
               <span className='drag-handle draggable-player'>☰</span>
               <span

@@ -100,6 +100,81 @@ table.inning-table thead tr {
   display: table-row;
 }
 
+.inning-title-cell {
+  padding: 8px 6px !important;
+}
+
+.inning-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.inning-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  border: 1px solid rgba(255, 214, 168, 0.65);
+  color: #ffffff;
+  box-shadow:
+    0 4px 10px rgba(255, 122, 24, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.inning-subtitle {
+  font-size: 0.64rem;
+  opacity: 0.95;
+  color: #f3cfe7;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.column-label {
+  color: #2c1638;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.7px !important;
+  text-shadow: none;
+}
+
+.position-label {
+  background: linear-gradient(
+    135deg,
+    rgba(137, 210, 255, 0.85),
+    rgba(174, 224, 255, 0.7)
+  );
+}
+
+.player-label {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 177, 145, 0.85),
+    rgba(255, 203, 185, 0.72)
+  );
+}
+
+.label-kicker {
+  display: block;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  opacity: 0.95;
+  margin-bottom: 2px;
+}
+
+.position-label .label-kicker {
+  color: #184a73;
+}
+
+.player-label .label-kicker {
+  color: #7a2548;
+}
+
 table.inning-table tbody {
   height: auto;
   display: table;
@@ -177,6 +252,22 @@ table.inning-table td {
   background: rgba(255, 255, 255, 0.05);
   font-weight: 600;
   position: relative;
+}
+
+table.inning-table tbody td:first-child {
+  background: linear-gradient(
+    90deg,
+    rgba(56, 189, 248, 0.14),
+    rgba(255, 255, 255, 0.06)
+  );
+}
+
+table.inning-table tbody td:last-child {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 111, 60, 0.14)
+  );
 }
 
 table.inning-table td:hover {
@@ -268,6 +359,28 @@ table.inning-table th:hover {
   color: #000000 !important;
 }
 
+.position-select-cell {
+  background: #ffffff !important;
+  padding: 4px !important;
+}
+
+.position-select {
+  width: 100%;
+  border: 1px solid rgba(156, 39, 176, 0.35);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 6px 8px;
+  outline: none;
+}
+
+.position-select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
 table.inning-table tbody tr:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: scale(1.02);
@@ -299,11 +412,69 @@ td[contenteditable="true"]:focus {
   border: 2px solid #e91e63;
 }
 
+/* Sleeker inning card/table treatment while keeping existing colors */
+table.inning-table {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.16),
+    0 2px 10px rgba(156, 39, 176, 0.25);
+  animation: fadeInUp 0.35s ease-out;
+}
+
+table.inning-table::after {
+  display: none;
+}
+
+table.inning-table:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.2),
+    0 4px 14px rgba(156, 39, 176, 0.3);
+  animation: none;
+}
+
+table.inning-table thead {
+  box-shadow: none;
+}
+
+table.inning-table th {
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+}
+
+table.inning-table td,
+table.inning-table th {
+  padding: 10px 8px;
+}
+
+table.inning-table tbody tr {
+  animation: none;
+}
+
+table.inning-table tbody tr:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+table.inning-table td:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.draggable-row:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.draggable-row:hover .draggable-player {
+  transform: none;
+}
+
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
   table.inning-table {
@@ -332,13 +503,26 @@ td[contenteditable="true"]:focus {
     letter-spacing: 0 !important;
   }
 
-  table.inning-table thead div {
+  .inning-subtitle,
+  .label-kicker {
     display: none !important;
   }
 
   .player-cell {
     gap: 2px !important;
     padding: 2px !important;
+  }
+
+  .position-select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-align: center;
+    font-size: 0.62rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
 

@@ -266,6 +266,16 @@ h1:hover {
   color: #ffffff;
 }
 
+.mode-hint {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 0.85rem;
+  color: #ffe4f4;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  vertical-align: middle;
+}
+
 .innings-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -468,6 +478,92 @@ h1:hover {
   font-size: 1rem;
   border-radius: 8px;
   font-weight: 600;
+}
+
+/* Sleeker rotator look: cleaner spacing, calmer shadows, less visual noise */
+.lineup-container {
+  max-width: 1320px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    0 2px 10px rgba(255, 102, 0, 0.2);
+}
+
+.lineup-container:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.2),
+    0 4px 14px rgba(255, 102, 0, 0.25);
+}
+
+h1 {
+  font-size: clamp(1.9rem, 3.6vw, 2.45rem);
+  letter-spacing: 2px;
+  padding: 14px 26px;
+  border-radius: 12px;
+  animation: fadeInScale 0.45s ease-out;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+}
+
+h1::before {
+  display: none;
+}
+
+.btn {
+  border-radius: 10px;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  font-weight: 700;
+  animation: none;
+}
+
+.btn::before {
+  display: none;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-outline-light:hover {
+  transform: translateY(-1px);
+  animation: none;
+}
+
+.form-select {
+  border-radius: 10px;
+  animation: none;
+}
+
+.innings-container {
+  gap: 12px;
+}
+
+.innings-container > * {
+  min-height: 460px;
+}
+
+.inning-actions {
+  margin-bottom: 6px;
+  padding: 2px;
+}
+
+.inning-actions .btn {
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+.saved-rotations-section {
+  border-radius: 10px;
+  border: 1px solid rgba(156, 39, 176, 0.35);
+}
+
+.saved-rotation-item {
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.save-modal-content {
+  border-radius: 14px;
 }
 
 @media print {

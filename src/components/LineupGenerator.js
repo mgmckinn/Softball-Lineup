@@ -3,7 +3,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import InningTable from "./InningTable";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { generateUniqueInnings, getDefaultPlayers } from "../utils/lineupUtils";
+import {
+  generateUniqueInnings,
+  getDefaultPlayers,
+  getDefaultPositions,
+} from "../utils/lineupUtils";
 import "./LineupGenerator.css";
 
 function LineupGenerator() {
@@ -22,11 +26,20 @@ function LineupGenerator() {
     "lineupGeneratorMode",
     "batting-order",
   );
+  const [positionInputMode, setPositionInputMode] = useLocalStorage(
+    "positionInputMode",
+    "dropdown",
+  );
 
   const defaultPlayers = useMemo(() => getDefaultPlayers(), []);
+  const defaultPositions = useMemo(() => getDefaultPositions(), []);
   const [battingOrderPlayers] = useLocalStorage(
     "battingOrderPlayers",
     defaultPlayers.map((name, index) => ({ id: index + 1, name })),
+  );
+  const positionOptions = useMemo(
+    () => [...defaultPositions, "Bench"],
+    [defaultPositions],
   );
 
   const battingOrder = useMemo(
@@ -186,6 +199,20 @@ function LineupGenerator() {
           <option value='random-generator'>Use Generator (Random)</option>
         </select>
         <select
+          id='positionInputMode'
+          className='form-select d-inline-block'
+          style={{ width: "auto", marginRight: "10px" }}
+          value={positionInputMode}
+          onChange={(e) => setPositionInputMode(e.target.value)}>
+          <option value='write-in'>Positions: Write-In</option>
+          <option value='dropdown'>Positions: Dropdown</option>
+        </select>
+        <span className='mode-hint no-print'>
+          {positionInputMode === "dropdown"
+            ? "Dropdown active: choose positions from each row menu"
+            : "Write-In active: type positions directly in each row"}
+        </span>
+        <select
           id='inningCount'
           className='form-select d-inline-block'
           style={{ width: "auto", marginRight: "10px" }}
@@ -315,6 +342,8 @@ function LineupGenerator() {
               onPositionChange={(newPositions) =>
                 handlePositionChange(index, newPositions)
               }
+              positionInputMode={positionInputMode}
+              positionOptions={positionOptions}
             />
           </div>
         ))}
