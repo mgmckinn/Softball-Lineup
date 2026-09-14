@@ -1,13 +1,9 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import InningTable from "./InningTable";
 import useLocalStorage from "../hooks/useLocalStorage";
-import {
-  generateUniqueInnings,
-  getDefaultPositions,
-  getDefaultPlayers,
-} from "../utils/lineupUtils";
+import { generateUniqueInnings, getDefaultPlayers } from "../utils/lineupUtils";
 import "./LineupGenerator.css";
 
 function LineupGenerator() {
@@ -22,24 +18,62 @@ function LineupGenerator() {
   );
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [rotationName, setRotationName] = useState("");
+  const [lineupMode, setLineupMode] = useLocalStorage(
+    "lineupGeneratorMode",
+    "batting-order",
+  );
 
-  const defaultPositions = getDefaultPositions();
-  const defaultPlayers = getDefaultPlayers();
+  const defaultPlayers = useMemo(() => getDefaultPlayers(), []);
+  const [battingOrderPlayers] = useLocalStorage(
+    "battingOrderPlayers",
+    defaultPlayers.map((name, index) => ({ id: index + 1, name })),
+  );
 
-  // Generate innings on initial load
+  const battingOrder = useMemo(
+    () =>
+      battingOrderPlayers
+        ?.map((player) =>
+          typeof player === "string" ? player : (player?.name ?? "").trim(),
+        )
+        .filter(Boolean) || [],
+    [battingOrderPlayers],
+  );
+
+  const buildInnings = (players, count) =>
+    Array(count)
+      .fill(null)
+      .map(() => [...players]);
+
+  const buildBlankPositions = (playerCount, count) =>
+    Array(count)
+      .fill(null)
+      .map(() => Array(playerCount).fill(""));
+
+  // Keep rotator aligned with batting order when that mode is selected.
+  // In generator mode, regenerate when mode/inning count changes.
   useEffect(() => {
-    handleGenerateInnings(6);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const playersForGrid =
+      battingOrder.length > 0 ? battingOrder : defaultPlayers;
+    const newInnings =
+      lineupMode === "random-generator"
+        ? generateUniqueInnings(playersForGrid, inningCount)
+        : buildInnings(playersForGrid, inningCount);
+    const positions = buildBlankPositions(playersForGrid.length, inningCount);
+    setInnings(newInnings);
+    setCustomPositions(positions);
+  }, [battingOrder, defaultPlayers, inningCount, lineupMode]);
 
   const handleGenerateInnings = (count = inningCount) => {
-    const newInnings = generateUniqueInnings(defaultPlayers, count);
+    const playersForGrid =
+      battingOrder.length > 0 ? battingOrder : defaultPlayers;
+    const newInnings =
+      lineupMode === "random-generator"
+        ? generateUniqueInnings(playersForGrid, count)
+        : buildInnings(playersForGrid, count);
     setInnings(newInnings);
 
-    // Initialize custom positions for each inning
-    const positions = Array(count)
-      .fill(null)
-      .map(() => [...defaultPositions]);
+    // Initialize blank positions for each inning
+    const positions = buildBlankPositions(playersForGrid.length, count);
     setCustomPositions(positions);
 
     // Save to log
@@ -53,7 +87,7 @@ function LineupGenerator() {
         lineup.map((player, index) => ({
           position: positionsData[inningIdx]
             ? positionsData[inningIdx][index]
-            : defaultPositions[index],
+            : "",
           player,
         })),
       ),
@@ -143,6 +177,15 @@ function LineupGenerator() {
       <h1>Sunny D's Lineup Rotator</h1>
       <div className='no-print mb-3'>
         <select
+          id='lineupMode'
+          className='form-select d-inline-block'
+          style={{ width: "auto", marginRight: "10px" }}
+          value={lineupMode}
+          onChange={(e) => setLineupMode(e.target.value)}>
+          <option value='batting-order'>Match Batting Order</option>
+          <option value='random-generator'>Use Generator (Random)</option>
+        </select>
+        <select
           id='inningCount'
           className='form-select d-inline-block'
           style={{ width: "auto", marginRight: "10px" }}
@@ -158,7 +201,9 @@ function LineupGenerator() {
         <button
           className='btn btn-primary'
           onClick={() => handleGenerateInnings(inningCount)}>
-          Generate Innings
+          {lineupMode === "random-generator"
+            ? "Generate Random Innings"
+            : "Refresh from Batting Order"}
         </button>
         <button className='btn btn-success' onClick={handlePrint}>
           Save as PDF
@@ -261,7 +306,9 @@ function LineupGenerator() {
             <InningTable
               inningNumber={index + 1}
               lineup={lineup}
-              positions={customPositions[index] || defaultPositions}
+              positions={
+                customPositions[index] || Array(lineup.length).fill("")
+              }
               onLineupChange={(newLineup) =>
                 handleLineupChange(index, newLineup)
               }

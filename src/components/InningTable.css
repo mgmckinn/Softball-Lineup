@@ -101,7 +101,7 @@ table.inning-table thead tr {
 }
 
 table.inning-table tbody {
-  height: 100%;
+  height: auto;
   display: table;
   width: 100%;
   table-layout: fixed;
@@ -109,7 +109,7 @@ table.inning-table tbody {
 
 table.inning-table tbody tr {
   display: table-row;
-  height: 10%;
+  height: auto;
   transition: all 0.3s ease;
   animation: slideInRow 0.4s ease-out backwards;
 }
@@ -258,6 +258,14 @@ table.inning-table th:hover {
 .editable-position {
   cursor: text;
   pointer-events: auto;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.editable-position:hover,
+.editable-position:focus {
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 
 table.inning-table tbody tr:hover {
@@ -282,8 +290,8 @@ table.inning-table tbody tr:hover {
 td[contenteditable="true"],
 td[contenteditable="true"]:focus {
   outline: none;
-  background: rgba(0, 0, 0, 0.3);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-weight: 700;
   box-shadow:
     0 0 15px rgba(255, 255, 255, 0.6),
@@ -300,10 +308,37 @@ td[contenteditable="true"]:focus {
 
   table.inning-table {
     animation: none !important;
+    min-height: auto !important;
+    height: auto !important;
+    font-size: 0.62rem !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.25) !important;
   }
 
   table.inning-table tbody tr {
     animation: none !important;
+    height: auto !important;
+  }
+
+  table.inning-table td,
+  table.inning-table th {
+    padding: 3px 2px !important;
+  }
+
+  table.inning-table th {
+    font-size: 0.7rem !important;
+    letter-spacing: 0 !important;
+  }
+
+  table.inning-table thead div {
+    display: none !important;
+  }
+
+  .player-cell {
+    gap: 2px !important;
+    padding: 2px !important;
   }
 }
 

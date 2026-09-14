@@ -9,28 +9,22 @@ import BattingOrder from "./components/BattingOrder";
 import RotationLog from "./components/RotationLog";
 import "./App.css";
 
-const APP_VERSION = "2.1-softball"; // Updated version for softball positions
+const APP_VERSION = "2.1-softball";
+const ROUTER_BASENAME =
+  process.env.NODE_ENV === "production" ? "/Softball-Lineup" : "/";
 
 // Run version check immediately before component mount
 const storedVersion = localStorage.getItem("appVersion");
 if (storedVersion !== APP_VERSION) {
-  // Clear ALL localStorage data to ensure fresh start
-  const keysToRemove = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key !== "appVersion") {
-      keysToRemove.push(key);
-    }
-  }
-  keysToRemove.forEach((key) => localStorage.removeItem(key));
+  // Keep existing data so batting order and saved rotations remain persistent.
   localStorage.setItem("appVersion", APP_VERSION);
-  console.log("Updated to version", APP_VERSION, "- cleared all old data");
+  console.log("Updated to version", APP_VERSION, "- preserved existing data");
 }
 
 function App() {
   return (
     <Router
-      basename='/Softball-Lineup'
+      basename={ROUTER_BASENAME}
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,

@@ -1,31 +1,40 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
+import useLocalStorage from "../hooks/useLocalStorage";
 import "./BattingOrder.css";
 
 function BattingOrder() {
   const defaultPlayers = [
-    "Btraelynn",
-    "Brynleigh",
-    "Camille",
-    "Charley",
+    "Elizabeth",
     "Dakota",
     "Hadley",
-    "Elizabeth",
     "Madelyn O",
+    "Camille",
+    "Charley",
+    "Braelynn",
     "Madelyn M",
-    "RaeLynn",
   ];
 
-  const [players, setPlayers] = useState(
+  const [players, setPlayers] = useLocalStorage(
+    "battingOrderPlayers",
     defaultPlayers.map((name, index) => ({ id: index + 1, name })),
   );
   const [newName, setNewName] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("#FF6600");
-  const [textColor, setTextColor] = useState("#FFFFFF");
-  const [sponsorLogo, setSponsorLogo] = useState(null);
-  const [teamLogo, setTeamLogo] = useState(null);
+  const [primaryColor, setPrimaryColor] = useLocalStorage(
+    "battingOrderPrimaryColor",
+    "#FF6600",
+  );
+  const [textColor, setTextColor] = useLocalStorage(
+    "battingOrderTextColor",
+    "#FFFFFF",
+  );
+  const [sponsorLogo, setSponsorLogo] = useLocalStorage(
+    "battingOrderSponsorLogo",
+    null,
+  );
+  const [teamLogo, setTeamLogo] = useLocalStorage("battingOrderTeamLogo", null);
 
   const addName = () => {
     const playerName = newName.trim();

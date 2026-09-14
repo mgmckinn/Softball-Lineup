@@ -473,7 +473,7 @@ h1:hover {
 @media print {
   @page {
     size: letter landscape;
-    margin: 0.5in;
+    margin: 0.6in 0.5in 0.5in;
   }
 
   * {
@@ -486,16 +486,56 @@ h1:hover {
     display: none !important;
   }
 
+  button,
+  .btn {
+    display: none !important;
+  }
+
   body {
     background: white !important;
+  }
+
+  .lineup-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    animation: none !important;
+  }
+
+  h1 {
+    margin: 0 0 10px !important;
+    padding: 8px 10px !important;
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 1px !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    overflow: visible !important;
   }
 
   h1::before {
     display: none !important;
   }
 
+  .innings-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    margin-top: 0 !important;
+  }
+
+  .innings-container > * {
+    min-height: auto !important;
+    animation: none !important;
+  }
+
   .inning-block {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .draggable-player,
