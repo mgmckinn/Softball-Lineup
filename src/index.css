@@ -21,10 +21,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(-45deg, #fffdf9, #ffe8d1, #ffd6e2, #e8f4ff);
+  background: linear-gradient(-45deg, #9c27b0, #e91e63, #2196f3, #00bcd4);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
-  color: #2f2f2f;
+  color: #fff;
   min-height: 100vh;
   overflow-x: hidden;
 }

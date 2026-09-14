@@ -28,7 +28,7 @@
   margin: 0 0 20px !important;
   margin-top: 0 !important;
   padding: 20px 40px;
-  background: linear-gradient(135deg, #ff8f1f, #ff6f3c, #ff5f99, #5dade2);
+  background: linear-gradient(135deg, #9c27b0, #e91e63, #2196f3);
   border-radius: 16px;
   display: inline-block;
   text-transform: uppercase;
@@ -36,12 +36,12 @@
   text-shadow:
     0 4px 8px rgba(0, 0, 0, 0.9),
     0 0 30px rgba(255, 255, 255, 0.5),
-    0 0 50px rgba(255, 95, 153, 0.55);
+    0 0 50px rgba(233, 30, 99, 0.6);
   animation:
     fadeInBatting 0.6s ease-out,
     titleBounce 2s ease-in-out infinite,
     gradientShift 4s ease infinite;
-  box-shadow: 0 8px 25px rgba(255, 111, 60, 0.6);
+  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.6);
   position: relative;
   overflow: hidden;
 }
@@ -74,10 +74,10 @@
 @keyframes gradientShift {
   0%,
   100% {
-    background: linear-gradient(135deg, #ff8f1f, #ff6f3c, #ff5f99, #5dade2);
+    background: linear-gradient(135deg, #9c27b0, #e91e63, #2196f3);
   }
   50% {
-    background: linear-gradient(135deg, #ffb347, #ff5f99, #5dade2, #ff8f1f);
+    background: linear-gradient(135deg, #2196f3, #9c27b0, #e91e63);
   }
 }
 
@@ -117,7 +117,7 @@
 }
 
 .control-group h2 {
-  color: #8a4500;
+  color: #ffffff;
   font-size: 1.2rem;
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -137,7 +137,7 @@
 
 .color-picker-group label,
 .logo-upload-group label {
-  color: #6f3a00;
+  color: #ffffff;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -187,10 +187,10 @@ input[type="file"] {
   flex: 1;
   min-width: 200px;
   padding: 10px 15px;
-  border: 2px solid rgba(255, 153, 61, 0.65);
+  border: 2px solid #ffffff;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #5c2f00;
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -198,13 +198,13 @@ input[type="file"] {
 
 .player-input:focus {
   outline: none;
-  border-color: #ff8f1f;
-  box-shadow: 0 0 15px rgba(255, 143, 31, 0.45);
-  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .player-input::placeholder {
-  color: rgba(111, 58, 0, 0.55);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .batting-container {

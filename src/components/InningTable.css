@@ -25,13 +25,13 @@ table.inning-table {
   height: 100%;
   min-height: 500px;
   font-size: 0.95rem;
-  color: #3b220a;
+  color: #fff;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(155deg, #fffefb, #fff2e5, #ffe2d0);
+  background: linear-gradient(145deg, #9c27b0, #e91e63);
   box-shadow:
-    0 8px 20px rgba(255, 132, 54, 0.35),
-    0 0 40px rgba(255, 255, 255, 0.35);
+    0 8px 20px rgba(156, 39, 176, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.1);
   table-layout: fixed;
   border-collapse: collapse;
   display: flex;
@@ -39,7 +39,7 @@ table.inning-table {
   transition: all 0.4s ease;
   animation: fadeInUp 0.6s ease-out;
   position: relative;
-  border: 2px solid rgba(255, 143, 31, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 table.inning-table::after {
@@ -60,10 +60,10 @@ table.inning-table::after {
 
 table.inning-table:hover {
   box-shadow:
-    0 12px 30px rgba(255, 111, 60, 0.45),
-    0 0 60px rgba(93, 173, 226, 0.22);
+    0 12px 30px rgba(156, 39, 176, 0.6),
+    0 0 60px rgba(255, 255, 255, 0.2);
   transform: translateY(-5px) scale(1.02);
-  border-color: rgba(255, 111, 60, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -71,13 +71,13 @@ table.inning-table:hover {
   0%,
   100% {
     box-shadow:
-      0 12px 30px rgba(255, 111, 60, 0.45),
-      0 0 60px rgba(93, 173, 226, 0.22);
+      0 12px 30px rgba(156, 39, 176, 0.6),
+      0 0 60px rgba(255, 255, 255, 0.2);
   }
   50% {
     box-shadow:
-      0 15px 40px rgba(255, 95, 153, 0.45),
-      0 0 80px rgba(255, 179, 109, 0.35);
+      0 15px 40px rgba(156, 39, 176, 0.8),
+      0 0 80px rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -86,7 +86,7 @@ table.inning-table:hover::after {
 }
 
 table.inning-table thead {
-  background: linear-gradient(135deg, #ff8f1f, #ff6f3c, #ff5f99);
+  background: linear-gradient(135deg, #9c27b0, #e91e63);
   color: #ffffff;
   display: table;
   width: 100%;
@@ -157,7 +157,7 @@ table.inning-table tbody tr:nth-child(10) {
 }
 
 table.inning-table tbody tr:hover {
-  background: rgba(255, 170, 120, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
   z-index: 10;
@@ -167,21 +167,21 @@ table.inning-table td,
 table.inning-table th {
   text-align: center;
   padding: 12px 8px;
-  border: 1px solid rgba(255, 162, 83, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: table-cell;
   vertical-align: middle;
   transition: all 0.3s ease;
 }
 
 table.inning-table td {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.05);
   font-weight: 600;
   position: relative;
 }
 
 table.inning-table td:hover {
-  background: rgba(255, 236, 220, 0.92);
-  color: #3b220a;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   cursor: pointer;
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
@@ -199,7 +199,7 @@ table.inning-table th {
 
 table.inning-table th:hover {
   transform: scale(1.05);
-  text-shadow: 0 0 10px rgba(255, 95, 153, 0.75);
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.8);
 }
 
 .player-cell {
