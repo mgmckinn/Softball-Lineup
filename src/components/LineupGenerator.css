@@ -148,6 +148,45 @@ h1:hover {
   transition: transform 0.3s ease;
 }
 
+.team-name-editable {
+  cursor: pointer;
+  position: relative;
+}
+
+.team-name-editable:hover::after {
+  content: " ✏️";
+  font-size: 0.7em;
+  opacity: 0.8;
+}
+
+.team-name-edit {
+  margin: 0 0 20px !important;
+}
+
+.team-name-input {
+  font-size: 2.8rem;
+  font-weight: 900;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #9c27b0, #e91e63, #2196f3);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-family: inherit;
+  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.6);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.team-name-input:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 8px 30px rgba(233, 30, 99, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
 .btn {
   margin: 0 10px 10px 0;
   padding: 10px 24px;

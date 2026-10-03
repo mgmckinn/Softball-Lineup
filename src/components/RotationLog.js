@@ -9,7 +9,16 @@ import {
 } from "../utils/lineupUtils";
 import "./RotationLog.css";
 
-function RotationLog() {
+function RotationLog({
+  teamName,
+  setTeamName,
+  isEditingTeamName,
+  teamNameInput,
+  onTeamNameClick,
+  onTeamNameSave,
+  onTeamNameInputChange,
+  onTeamNameKeyPress,
+}) {
   const [rotationLog, setRotationLog] = useLocalStorage("rotationLog", []);
 
   const defaultPositions = getDefaultPositions();
@@ -83,7 +92,26 @@ function RotationLog() {
 
   return (
     <div className='rotation-log-container'>
-      <h1 className='text-center mb-4'>Sunny D's Rotation Log</h1>
+      {isEditingTeamName ? (
+        <div className='team-name-edit'>
+          <input
+            type='text'
+            value={teamNameInput}
+            onChange={onTeamNameInputChange}
+            onBlur={onTeamNameSave}
+            onKeyPress={onTeamNameKeyPress}
+            autoFocus
+            className='team-name-input'
+          />
+        </div>
+      ) : (
+        <h1
+          onClick={onTeamNameClick}
+          className='team-name-editable text-center mb-4'
+          title='Click to edit team name'>
+          {teamName}'s Rotation Log
+        </h1>
+      )}
       <div className='text-center mb-4'>
         <button className='btn btn-danger me-2' onClick={resetLog}>
           Reset Log

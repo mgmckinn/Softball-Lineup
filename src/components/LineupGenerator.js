@@ -10,7 +10,16 @@ import {
 } from "../utils/lineupUtils";
 import "./LineupGenerator.css";
 
-function LineupGenerator() {
+function LineupGenerator({
+  teamName,
+  setTeamName,
+  isEditingTeamName,
+  teamNameInput,
+  onTeamNameClick,
+  onTeamNameSave,
+  onTeamNameInputChange,
+  onTeamNameKeyPress,
+}) {
   const [inningCount, setInningCount] = useState(6);
   const [innings, setInnings] = useState([]);
   const [customPositions, setCustomPositions] = useState([]);
@@ -65,6 +74,12 @@ function LineupGenerator() {
   // Keep rotator aligned with batting order when that mode is selected.
   // In generator mode, regenerate when mode/inning count changes.
   useEffect(() => {
+    console.log(
+      "useEffect triggered - lineupMode:",
+      lineupMode,
+      "inningCount:",
+      inningCount,
+    );
     const playersForGrid =
       battingOrder.length > 0 ? battingOrder : defaultPlayers;
     const newInnings =
@@ -77,12 +92,19 @@ function LineupGenerator() {
   }, [battingOrder, defaultPlayers, inningCount, lineupMode]);
 
   const handleGenerateInnings = (count = inningCount) => {
+    console.log(
+      "Generate button clicked - lineupMode:",
+      lineupMode,
+      "count:",
+      count,
+    );
     const playersForGrid =
       battingOrder.length > 0 ? battingOrder : defaultPlayers;
     const newInnings =
       lineupMode === "random-generator"
         ? generateUniqueInnings(playersForGrid, count)
         : buildInnings(playersForGrid, count);
+    console.log("Generated innings:", newInnings);
     setInnings(newInnings);
 
     // Initialize blank positions for each inning
@@ -187,7 +209,26 @@ function LineupGenerator() {
 
   return (
     <div className='lineup-container text-center'>
-      <h1>Sunny D's Lineup Rotator</h1>
+      {isEditingTeamName ? (
+        <div className='team-name-edit'>
+          <input
+            type='text'
+            value={teamNameInput}
+            onChange={onTeamNameInputChange}
+            onBlur={onTeamNameSave}
+            onKeyPress={onTeamNameKeyPress}
+            autoFocus
+            className='team-name-input'
+          />
+        </div>
+      ) : (
+        <h1
+          onClick={onTeamNameClick}
+          className='team-name-editable'
+          title='Click to edit team name'>
+          {teamName}
+        </h1>
+      )}
       <div className='no-print mb-3'>
         <select
           id='lineupMode'

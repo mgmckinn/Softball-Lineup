@@ -5,7 +5,16 @@ import { ReactSortable } from "react-sortablejs";
 import useLocalStorage from "../hooks/useLocalStorage";
 import "./BattingOrder.css";
 
-function BattingOrder() {
+function BattingOrder({
+  teamName,
+  setTeamName,
+  isEditingTeamName,
+  teamNameInput,
+  onTeamNameClick,
+  onTeamNameSave,
+  onTeamNameInputChange,
+  onTeamNameKeyPress,
+}) {
   const defaultPlayers = [
     "Elizabeth",
     "Dakota",
@@ -160,7 +169,26 @@ function BattingOrder() {
         </div>
       </div>
 
-      <h1 className='batting-title'>Sunny D's Batting Order</h1>
+      {isEditingTeamName ? (
+        <div className='team-name-edit'>
+          <input
+            type='text'
+            value={teamNameInput}
+            onChange={onTeamNameInputChange}
+            onBlur={onTeamNameSave}
+            onKeyPress={onTeamNameKeyPress}
+            autoFocus
+            className='team-name-input'
+          />
+        </div>
+      ) : (
+        <h1
+          onClick={onTeamNameClick}
+          className='team-name-editable'
+          title='Click to edit team name'>
+          {teamName}
+        </h1>
+      )}
 
       <div className='batting-container'>
         <div className='logos-container'>

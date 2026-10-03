@@ -4,7 +4,15 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({
+  teamName,
+  isEditingTeamName,
+  teamNameInput,
+  onTeamNameClick,
+  onTeamNameSave,
+  onTeamNameInputChange,
+  onTeamNameKeyPress,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,6 +46,29 @@ function Sidebar() {
             ×
           </button>
         </div>
+
+        <div className='team-name-section'>
+          {isEditingTeamName ? (
+            <input
+              type='text'
+              value={teamNameInput}
+              onChange={onTeamNameInputChange}
+              onBlur={onTeamNameSave}
+              onKeyPress={onTeamNameKeyPress}
+              autoFocus
+              className='team-name-sidebar-input'
+              placeholder='Team name'
+            />
+          ) : (
+            <div
+              onClick={onTeamNameClick}
+              className='team-name-sidebar'
+              title='Click to edit team name'>
+              <strong>{teamName}</strong>
+            </div>
+          )}
+        </div>
+
         <ul className='sidebar-menu'>
           <li
             className={location.pathname === "/" ? "active" : ""}

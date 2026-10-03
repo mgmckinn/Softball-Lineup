@@ -1,7 +1,8 @@
 /** @format */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import useLocalStorage from "./hooks/useLocalStorage";
 import Sidebar from "./components/Sidebar";
 import OfflineIndicator from "./components/OfflineIndicator";
 import LineupGenerator from "./components/LineupGenerator";
@@ -22,6 +23,40 @@ if (storedVersion !== APP_VERSION) {
 }
 
 function App() {
+  const [teamName, setTeamName] = useLocalStorage(
+    "sharedTeamName",
+    "Sunny D's Team",
+  );
+  const [isEditingTeamName, setIsEditingTeamName] = useState(false);
+  const [teamNameInput, setTeamNameInput] = useState(teamName);
+
+  useEffect(() => {
+    setTeamNameInput(teamName);
+  }, [teamName]);
+
+  const handleTeamNameClick = () => {
+    setTeamNameInput(teamName);
+    setIsEditingTeamName(true);
+  };
+
+  const handleTeamNameSave = () => {
+    const newName = teamNameInput.trim();
+    if (newName) {
+      setTeamName(newName);
+    } else {
+      setTeamNameInput(teamName);
+    }
+    setIsEditingTeamName(false);
+  };
+
+  const handleTeamNameKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleTeamNameSave();
+    } else if (e.key === "Escape") {
+      setIsEditingTeamName(false);
+    }
+  };
+
   return (
     <Router
       basename={ROUTER_BASENAME}
@@ -30,12 +65,62 @@ function App() {
         v7_relativeSplatPath: true,
       }}>
       <div className='App'>
-        <Sidebar />
+        <Sidebar
+          teamName={teamName}
+          isEditingTeamName={isEditingTeamName}
+          teamNameInput={teamNameInput}
+          onTeamNameClick={handleTeamNameClick}
+          onTeamNameSave={handleTeamNameSave}
+          onTeamNameInputChange={(e) => setTeamNameInput(e.target.value)}
+          onTeamNameKeyPress={handleTeamNameKeyPress}
+        />
         <OfflineIndicator />
         <Routes>
-          <Route path='/' element={<LineupGenerator />} />
-          <Route path='/batting-order' element={<BattingOrder />} />
-          <Route path='/rotation-log' element={<RotationLog />} />
+          <Route
+            path='/'
+            element={
+              <LineupGenerator
+                teamName={teamName}
+                setTeamName={setTeamName}
+                isEditingTeamName={isEditingTeamName}
+                teamNameInput={teamNameInput}
+                onTeamNameClick={handleTeamNameClick}
+                onTeamNameSave={handleTeamNameSave}
+                onTeamNameInputChange={(e) => setTeamNameInput(e.target.value)}
+                onTeamNameKeyPress={handleTeamNameKeyPress}
+              />
+            }
+          />
+          <Route
+            path='/batting-order'
+            element={
+              <BattingOrder
+                teamName={teamName}
+                setTeamName={setTeamName}
+                isEditingTeamName={isEditingTeamName}
+                teamNameInput={teamNameInput}
+                onTeamNameClick={handleTeamNameClick}
+                onTeamNameSave={handleTeamNameSave}
+                onTeamNameInputChange={(e) => setTeamNameInput(e.target.value)}
+                onTeamNameKeyPress={handleTeamNameKeyPress}
+              />
+            }
+          />
+          <Route
+            path='/rotation-log'
+            element={
+              <RotationLog
+                teamName={teamName}
+                setTeamName={setTeamName}
+                isEditingTeamName={isEditingTeamName}
+                teamNameInput={teamNameInput}
+                onTeamNameClick={handleTeamNameClick}
+                onTeamNameSave={handleTeamNameSave}
+                onTeamNameInputChange={(e) => setTeamNameInput(e.target.value)}
+                onTeamNameKeyPress={handleTeamNameKeyPress}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>

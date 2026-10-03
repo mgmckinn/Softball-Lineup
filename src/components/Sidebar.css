@@ -109,6 +109,46 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+.team-name-section {
+  padding: 15px 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 10px;
+}
+
+.team-name-sidebar {
+  color: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  word-break: break-word;
+}
+
+.team-name-sidebar:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.team-name-sidebar-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.team-name-sidebar-input:focus {
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
 .close-btn {
   background: none;
   border: none;
