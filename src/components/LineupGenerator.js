@@ -7,6 +7,7 @@ import {
   generateUniqueInnings,
   getDefaultPlayers,
   getDefaultPositions,
+  shuffle,
 } from "../utils/lineupUtils";
 import "./LineupGenerator.css";
 
@@ -149,6 +150,15 @@ function LineupGenerator({
     window.print();
   };
 
+  const handleRandomizePositions = () => {
+    const newCustomPositions = customPositions.map((inningPositions) => {
+      const shuffledPositions = shuffle(inningPositions);
+      return shuffledPositions;
+    });
+    setCustomPositions(newCustomPositions);
+    saveToLog(innings, newCustomPositions);
+  };
+
   const handleCopyInning = (inningIndex) => {
     setCopiedInning({
       lineup: [...innings[inningIndex]],
@@ -277,6 +287,12 @@ function LineupGenerator({
           Save as PDF
         </button>
         <button
+          className='btn btn-warning'
+          onClick={handleRandomizePositions}
+          style={{ marginLeft: "10px" }}>
+          🔀 Randomize Positions
+        </button>
+        <button
           className='btn btn-info'
           onClick={() => setShowSaveModal(true)}
           style={{ marginLeft: "10px" }}>
@@ -361,14 +377,14 @@ function LineupGenerator({
                 className='btn btn-sm btn-outline-light'
                 onClick={() => handleCopyInning(index)}
                 title='Copy this inning'>
-                📋 Copy
+                <span style={{ fontSize: '1.5rem' }}>📋</span> Copy
               </button>
               <button
                 className='btn btn-sm btn-outline-light'
                 onClick={() => handlePasteInning(index)}
                 disabled={!copiedInning}
                 title='Paste copied inning here'>
-                📄 Paste
+                <span style={{ fontSize: '1.5rem' }}>📄</span> Paste
               </button>
             </div>
             <InningTable
